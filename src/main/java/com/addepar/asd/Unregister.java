@@ -1,13 +1,13 @@
 /**************************************************************************
 **
-**                             < Deregister.java >
+**                             < Unregister.java >
 **
 **************************************************************************/
 
 
 /**************************************************************************
 **
-**  File Name    : Deregister.java
+**  File Name    : Unregister.java
 **
 **  Author       : Addepar Infrastructure Platform Tools Team 
 **                          
@@ -58,18 +58,27 @@ package com.addepar.asd;
 
 /**
  *
- * @author josef.grosch
+ * @author Bob Dobbs
  */
-public class Deregister {
-
-    public Deregister() {
+public class Unregister {
+    /**
+     * 
+     */
+    public Unregister() {
         super();
     }
-}   // End of class Deregister
+    
+    /**
+     * 
+     * @param sm 
+     */
+    public Unregister(ServiceMessage sm) {
+    }
+}   // End of class Unregister
 
 
 /**************************************************************************
 **
-**                          < End of Deregister.java >
+**                          < End of Unregister.java >
 **
 **************************************************************************/
