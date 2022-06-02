@@ -58,7 +58,7 @@ package com.addepar.asd;
 
 /**
  *
- * @author josef.grosch
+ * @author Bob Dobbs
  */
 public class Service {
 

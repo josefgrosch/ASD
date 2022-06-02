@@ -1,15 +1,15 @@
 /**************************************************************************
 **
-**                             < Register.java >
+**                             < ASDReply.java >
 **
 **************************************************************************/
 
 
 /**************************************************************************
 **
-**  File Name    : Register.java
+**  File Name    : ASDReply.java
 **
-**  Author       : Addepar Infrastructure Platform Tools Team
+**  Author       : Addepar Infrastructure Platform Tools Team 
 **                          
 **  Date         : 31 May 2022
 **
@@ -60,28 +60,15 @@ package com.addepar.asd;
  *
  * @author Bob Dobbs
  */
-public class Register {
-
-    /**
-     * 
-     */
-    public Register() {
+public class ASDReply {
+    public ASDReply() {
         super();
-    }
-    
-    /**
-     * 
-     * @param sm 
-     */
-    public Register(ServiceMessage sm) {
-        this();
-    }
-    
-}   // End of class Register
+    }   // End of default class constructor
+}   // End of class
 
 
 /**************************************************************************
 **
-**                          < End of Register.java >
+**                          < End of ASDReply.java >
 **
 **************************************************************************/

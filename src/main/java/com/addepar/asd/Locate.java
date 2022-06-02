@@ -58,13 +58,24 @@ package com.addepar.asd;
 
 /**
  *
- * @author josef.grosch
+ * @author Bob Dobbs
  */
 public class Locate {
 
+    /**
+     * 
+     */
     public Locate() {
         super();
-    }
+    }   // End of default constructor
+    
+    /**
+     * 
+     * @param sm 
+     */
+    public Locate(ServiceMessage sm) {
+        this();
+    }   // End of consutuctor
 }   // End of class Locate
 
 
