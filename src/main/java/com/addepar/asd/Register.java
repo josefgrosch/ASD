@@ -54,6 +54,7 @@ package com.addepar.asd;
 **                                Imports
 **
 **************************************************************************/
+import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
 
 
 /**
@@ -77,6 +78,39 @@ public class Register {
         this();
     }
     
+    /**
+     * 
+     * @param sm
+     * @return 
+     */
+    public static ASDReply register(ServiceMessage sm) {
+        ASDReply asdr = new ASDReply();
+        
+     PutParameterResponse ppr = null;
+        String value = "";
+        String key = "";
+        /*
+        try {    
+            SsmClient ssmClient = SsmClient.builder().region(Region.US_EAST_2).build();
+        
+            PutParameterRequest pr = PutParameterRequest.builder()
+                    .value(value) 
+                    .name(key)
+                    .type("String")
+                    .dataType("text")
+                    .overwrite(true)
+                    .build();
+            
+            ppr = ssmClient.putParameter(pr);    
+        }
+        catch (AwsServiceException | SdkClientException e) {
+            System.out.println("Something went wrong.\n\n");
+            System.out.println(e.getMessage());
+        }
+        */
+        return asdr;
+        
+    }
 }   // End of class Register
 
 
