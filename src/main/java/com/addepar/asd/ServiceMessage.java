@@ -54,6 +54,7 @@ package com.addepar.asd;
 **                                Imports
 **
 **************************************************************************/
+import org.json.JSONObject;
 
 
 /**
@@ -82,7 +83,7 @@ public class ServiceMessage {
     /**
      * 
      */
-    private String accountName = "";
+    private String accountId = "";
     
     /**
      * 
@@ -156,7 +157,6 @@ public class ServiceMessage {
      * @param sm 
      */
     public ServiceMessage(ServiceMessage sm) {
-            
         this();
         
         this.serviceName        = sm.getServiceName();
@@ -166,6 +166,22 @@ public class ServiceMessage {
         this.locateService      = sm.getLocateService();
     }   // End of constructor
     
+    /**
+     * 
+     * @param jStr 
+     */
+    //public ServiceMessage(String jStr) {
+    //    this();
+    //}
+    
+    /**
+     * 
+     * @param jObj 
+     */
+    public ServiceMessage(JSONObject jObj) {
+        this();
+    }
+    
     //
     // Get
     // 
@@ -174,8 +190,8 @@ public class ServiceMessage {
      * 
      * @return 
      */
-    public String getAccountName() {
-        return this.accountName;
+    public String getAccountId() {
+        return this.accountId;
     }
 
     /**
@@ -240,10 +256,10 @@ public class ServiceMessage {
     
     /**
      * 
-     * @param accountName 
+     * @param accountId 
      */
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setAccountName(String accountId) {
+        this.accountId = accountId;
     }
 
     /**

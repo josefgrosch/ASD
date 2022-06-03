@@ -63,13 +63,17 @@ import org.json.JSONObject;
  * @author Bob Dobbs
  */
 public class Common {
-
     /**
      * 
      */
-    public Common() {
-        super();
-    }   // End of defailt class constructor
+    public final static String DEFAULT_REGION = "us_east_2";
+    
+    /**
+     * 
+     */
+    //public Common() {
+    //    super();
+    //}   // End of defailt class constructor
     
     /**
      * 
@@ -84,7 +88,7 @@ public class Common {
         
         jObj.put("gen_time_epoch",     TimeNow);
         jObj.put("arcade_name",        sm.getArcadeName());
-        jObj.put("account_name",       sm.getAccountName());
+        jObj.put("account_id",         sm.getAccountId());
         jObj.put("arcade_name",        sm.getArcadeName());
         jObj.put("service_name",       sm.getServiceName());
         jObj.put("connection_string",  sm.getConnectionString());

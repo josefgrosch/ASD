@@ -68,8 +68,19 @@ import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
  * @author Bob Dobbs
  */
 public class ASD {
-
-    private String arcadeName     = "";
+    /**
+     * The <b>accountName</b> is the AWS 
+     */
+    private String accountId   = "";
+    
+    /**
+     * 
+     */
+    private String arcadeName    = "";
+    
+    /**
+     * 
+     */
     private String defaultRegion = "";
     
     /**
@@ -77,26 +88,39 @@ public class ASD {
      */
     public ASD() {
         super();
-        /*
+        
         this.arcadeName = System.getenv("ARCADE_NAME");
-        this.defaultRegion = System.getenv("DEFAULT_REGION");
-        if (this.defaultRegion == null || this.defaultRegion.isEmpty()) {
-            this.defaultRegion = System.getenv("AWS_DEFAULT_REGION");
+        if (this.arcadeName == null || this.arcadeName.length() == 0) {
+            this.arcadeName = Common.DEFAULT_REGION;
         }
         
-        if (this.arcadeName.isEmpty()) {
-            this.arcadeName = this.defaultRegion;
+        this.defaultRegion = System.getenv("DEFAULT_REGION");
+        if (this.defaultRegion == null || this.defaultRegion.length() == 0) {
+            this.defaultRegion = Common.DEFAULT_REGION;
         }
         
         System.setProperty("aws.region", this.defaultRegion);
-        */
-    }   // End of default constructor
+        
+    }   // End of default class constructor
     
-    /*
-    public void getServiceMessage(ServiceMessage sm) {
-        boolean action = sm.getLocateService();
+    /**
+     * 
+     * @param sm 
+     */
+    public ASD(ServiceMessage sm) {
+        this();
+        
+        this.accountId  = sm.getAccountId();
+        this.arcadeName = sm.getServiceName();
+    }   // End of class constuctor with a ServiceMessage
+    
+    /**
+     * 
+     * @param arcadeName 
+     */
+    public ASD(String arcadeName) {
+        this();
     }
-    */
     
     /**
      * 
@@ -116,25 +140,38 @@ public class ASD {
     
     /**
      * 
+     * @return 
+     */
+    public String getAccountId() {
+        return this.accountId;
+    }
+    
+    /**
+     * 
      * @param sm
      * @return
      * @throws AwsServiceException
      * @throws SdkClientException 
      */
-    public ASDReply register(ServiceMessage sm) 
+    public ASDReply registerService(ServiceMessage sm) 
         throws AwsServiceException, SdkClientException {
+        boolean debug = true;
         ASDReply ar = new ASDReply();
         StringBuilder sb = new StringBuilder();
                 
         sb.append("/ASD/");
-        sb.append(sm.getAccountName()).append("/");
+        sb.append(sm.getAccountId()).append("/");
         sb.append(sm.getArcadeName()).append("/");
         sb.append(sm.getServiceName()).append("/service-status.json");
         String key = sb.toString();
         String value = sm.toJson();
         
-        //Region region = new Region();
-        
+        /*
+         * TODO - figure out how to take a region string, "us_east_2"
+         * and get Region.US_EAST_2
+         *
+         * Region region = new Region();
+         */
         
         SsmClient ssmClient = SsmClient.builder().region(Region.US_EAST_2).build();
         
@@ -146,33 +183,56 @@ public class ASD {
                 .overwrite(true)
                 .build();
             
-        PutParameterResponse ppr = ssmClient.putParameter(pr);    
+        PutParameterResponse ppr = ssmClient.putParameter(pr);  
+        
+        if (debug) {
+            System.out.println(ppr.toString());
+        }
+        
         ar.setPprResponse(ppr);
         
         return ar;
-    }   // End of register
+    }   // End of registerService
     
     /**
      * 
      * @param sm
      * @return 
      */
-    public ASDReply unregister(ServiceMessage sm) {
+    public ASDReply unregisterService(ServiceMessage sm) {
         ASDReply ar = new ASDReply();
         
         return ar;
-    }
+    }   // End of unregisterService
     
     /**
      * 
      * @param sm
      * @return 
      */
-    public ASDReply locate(ServiceMessage sm) {
+    public ASDReply locateService(ServiceMessage sm) {
         ASDReply ar = new ASDReply();
         
         return ar;
-    }
+    }   // End of locateService
+    
+    /**
+     * 
+     * @param sm
+     * @return 
+     */
+    public String getAllRegistedServices(ServiceMessage sm) {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("/ASD/");
+        sb.append(sm.getAccountId()).append("/");
+        sb.append(sm.getArcadeName()).append("/");
+        
+        String baseArcadeName = sb.toString();
+        
+        return sb.toString();
+    }   // End of getAllRegisteredServices
+    
     /*
 Region region = Region.US_EAST_1;
         SsmClient ssmClient = SsmClient.builder()
