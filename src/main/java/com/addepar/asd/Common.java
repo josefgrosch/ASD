@@ -102,7 +102,7 @@ public class Common {
      * @return 
      */
     private static String boolToString(boolean field) {
-        String outStr = "";
+        String outStr;
         
         if (field == true) {
             outStr = "True";
@@ -113,7 +113,7 @@ public class Common {
         }
         
         return outStr;
-    }
+    }   // End of boolToString
 }   // End of class Common
 
 
