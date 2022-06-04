@@ -88,7 +88,12 @@ public class ServiceMessage {
     /**
      * 
      */
-    //private String clientName = "";
+    private String clientName = "";
+    
+    /**
+     * 
+     */
+    private String clientId   = "";
     
     /**
      * 
@@ -110,6 +115,9 @@ public class ServiceMessage {
      */
     private boolean serviceStatus = false;
     
+    //
+    // Constructor methods
+    //
     
     /**
      * 
@@ -169,7 +177,7 @@ public class ServiceMessage {
     }
     
     //
-    // Get
+    // Get methods
     // 
     
     /**
@@ -180,6 +188,22 @@ public class ServiceMessage {
         return this.accountId;
     }
 
+    /**
+     * 
+     * @return 
+     */
+    public String getClientName() {
+        return this.clientName;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public String getClientId() {
+        return this.clientId;
+    }
+    
     /**
      * 
      * @return 
@@ -215,7 +239,7 @@ public class ServiceMessage {
     }
 
     //
-    // Set
+    // Set methods
     //
     
     /**
@@ -226,6 +250,22 @@ public class ServiceMessage {
         this.accountId = accountId;
     }
 
+    /**
+     * 
+     * @param clientName 
+     */
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+    
+    /**
+     * 
+     * @param clientId 
+     */
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+    
     /**
      * 
      * @param arcadeName 
@@ -249,9 +289,7 @@ public class ServiceMessage {
     public void setConnectionString(String connString) {
         this.connectionString = connString;
     }
-
     
-
     /**
      * 
      * @param status 
