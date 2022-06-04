@@ -88,7 +88,7 @@ public class ServiceMessage {
     /**
      * 
      */
-    private String clientName = "";
+    //private String clientName = "";
     
     /**
      * 

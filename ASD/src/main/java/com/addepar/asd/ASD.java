@@ -48,6 +48,12 @@
 **************************************************************************/
 package com.addepar.asd;
 
+
+/**************************************************************************
+**
+**                                Imports
+**
+**************************************************************************/
 import software.amazon.awssdk.awscore.exception.AwsServiceException;
 import software.amazon.awssdk.core.exception.SdkClientException;
 import software.amazon.awssdk.regions.Region;
@@ -56,16 +62,10 @@ import software.amazon.awssdk.services.ssm.model.PutParameterRequest;
 import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
 
 
-/**************************************************************************
-**
-**                                Imports
-**
-**************************************************************************/
-
-
 /**
  *
- * @author Bob Dobbs
+ * @author Bob Dobbs <bob.dobbs@addepar.com>
+ * @version 0.1
  */
 public class ASD {
     /**
@@ -232,35 +232,6 @@ public class ASD {
         
         return sb.toString();
     }   // End of getAllRegisteredServices
-    
-    /*
-Region region = Region.US_EAST_1;
-        SsmClient ssmClient = SsmClient.builder()
-                .region(region)
-                .credentialsProvider(ProfileCredentialsProvider.create())
-                .build();
-
-        getParaValue(ssmClient, paraName);
-        ssmClient.close();
-    }
-
-    public static void getParaValue(SsmClient ssmClient, String paraName) {
-
-        try {
-            GetParameterRequest parameterRequest = GetParameterRequest.builder()
-                .name(paraName)
-                .build();
-
-            GetParameterResponse parameterResponse = ssmClient.getParameter(parameterRequest);
-            System.out.println("The parameter value is "+parameterResponse.parameter().value());
-
-        } catch (SsmException e) {
-        System.err.println(e.getMessage());
-        System.exit(1);
-        }
-   }
-}
-    */
 }   // End of class ASD
 
 
