@@ -70,13 +70,6 @@ public class Common {
     
     /**
      * 
-     */
-    //public Common() {
-    //    super();
-    //}   // End of defailt class constructor
-    
-    /**
-     * 
      * @param sm
      * @return 
      */
@@ -92,32 +85,11 @@ public class Common {
         jObj.put("arcade_name",        sm.getArcadeName());
         jObj.put("service_name",       sm.getServiceName());
         jObj.put("connection_string",  sm.getConnectionString());
-        jObj.put("register_service",   boolToString(sm.getRegisterService()));
-        jObj.put("unregister_service", boolToString(sm.getUnregisterService()));
-        jObj.put("locate_service",     boolToString(sm.getLocateService()));
         jObj.put("service_status",     sm.getServiceStatus());
         
         return jObj.toString(4);
     }   // End of toJson
     
-    /**
-     * 
-     * @param field
-     * @return 
-     */
-    private static String boolToString(boolean field) {
-        String outStr;
-        
-        if (field == true) {
-            outStr = "True";
-        } else if (field == false) {
-            outStr = "False";
-        } else {
-            outStr = "False";
-        }
-        
-        return outStr;
-    }   // End of boolToString
 }   // End of class Common
 
 

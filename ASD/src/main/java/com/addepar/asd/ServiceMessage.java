@@ -62,8 +62,8 @@ import org.json.JSONObject;
  * @author Bob Dobbs
  */
 public class ServiceMessage {
-    // ASD/023960176222/dead_sky.arc/iverson.json
-    // ASD/<account>/<arcade>/<service>.json
+    // ASD/023960176222/joes_pretty_good_ISP/dead_sky.arc/iverson.json
+    // ASD/<AWS account ID>/<client>/<arcade>/<service>.json
 
     /*
 
@@ -88,6 +88,11 @@ public class ServiceMessage {
     /**
      * 
      */
+    private String clientName = "";
+    
+    /**
+     * 
+     */
     private String arcadeName = "";
     
     /**
@@ -100,21 +105,6 @@ public class ServiceMessage {
      */
     private String connectionString = "";
 
-    /**
-     * 
-     */
-    private boolean registerService = false;
-    
-    /**
-     * 
-     */
-    private boolean unregisterService = false;
-    
-    /**
-     * 
-     */
-    private boolean locateService = false;
-    
     /**
      * 
      */
@@ -147,9 +137,7 @@ public class ServiceMessage {
         
         this.serviceName        = serviceName;
         this.arcadeName         = arcadeName;
-        this.registerService    = registerService;
-        this.unregisterService  = unregisterService;
-        this.locateService      = locateService;
+        
     }   // End of constructor
 
     /**
@@ -161,9 +149,7 @@ public class ServiceMessage {
         
         this.serviceName        = sm.getServiceName();
         this.arcadeName         = sm.getArcadeName();
-        this.registerService    = sm.getRegisterService();
-        this.unregisterService  = sm.getUnregisterService();
-        this.locateService      = sm.getLocateService();
+        
     }   // End of constructor
     
     /**
@@ -218,29 +204,7 @@ public class ServiceMessage {
         return this.connectionString;
     }
 
-    /**
-     * 
-     * @return 
-     */
-    public boolean getRegisterService() {
-        return this.registerService;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    public boolean getUnregisterService() {
-        return this.unregisterService;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    public boolean getLocateService() {
-        return this.locateService;
-    }
+    
 
     /**
      * 
@@ -286,29 +250,7 @@ public class ServiceMessage {
         this.connectionString = connString;
     }
 
-    /**
-     * 
-     * @param register 
-     */
-    public void setRegisterService(boolean register) {
-        this.registerService = register;
-    }
-
-    /**
-     * 
-     * @param unregister 
-     */
-    public void setUnregisterService(boolean unregister) {
-        this.unregisterService = unregister;
-    }
-
-    /**
-     * 
-     * @param locate 
-     */
-    public void setLocateService(boolean locate) {
-        this.locateService = locate;
-    }
+    
 
     /**
      * 
