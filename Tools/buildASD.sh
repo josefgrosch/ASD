@@ -1,4 +1,4 @@
 #!/bin/sh
 
 cd ../ASD
-mvn clean javadoc:jar package install
+mvn -Dshow=private clean javadoc:jar package install

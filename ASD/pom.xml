@@ -20,7 +20,6 @@
                 <version>3.4.0</version>
                 <configuration>
                     <show>private</show>
-                    <nohelp>true</nohelp>
                 </configuration>
             </plugin>
             <plugin>

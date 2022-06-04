@@ -69,19 +69,34 @@ import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
  */
 public class ASD {
     /**
-     * The <b>accountName</b> is the AWS 
+     * The <b>accountId</b> is the AWS account ID.
      */
     private String accountId   = "";
     
     /**
-     * 
+     * The <b>clientName</b> is the name of Addepar's client.
      */
-    private String arcadeName    = "";
+    private String clientName  = "";
+
+    /**
+     * The <b>clientId</b> is the client's ID as assigned by Addepar.
+     */
+    private String clientId    = "";
     
     /**
-     * 
+     * The <b>arcadeName</b> is the name of the arcade the clients
+     * services are running in.
+     */
+    private String arcadeName  = "";
+    
+    /**
+     * The <b>defaultRegion</b> is the AWS region the arcade is running in.
      */
     private String defaultRegion = "";
+    
+    //
+    // Constructors
+    //
     
     /**
      * 
@@ -121,13 +136,34 @@ public class ASD {
     public ASD(String arcadeName) {
         this();
     }
-    
+
+    //
+    // Get methods
+    //
+
     /**
      * 
      * @return 
      */
-    public String getDefaultRegion() {
-        return this.defaultRegion;
+    public String getAccountId() {
+        return this.accountId;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public String getClientName() {
+        return this.clientName;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public String getClientId() {
+        return this.clientId;
+        
     }
     
     /**
@@ -137,14 +173,73 @@ public class ASD {
     public String getArcadeName() {
         return this.arcadeName;
     }
+
+    /**
+     * 
+     * @return 
+     */
+    public String getDefaultRegion() {
+        return this.defaultRegion;
+    }
+    
+        
+    //
+    // Set methods
+    //
+
+    /**
+     * 
+     * @param accountId 
+     */
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    /**
+     * 
+     * @param clientName 
+     */
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    /**
+     * 
+     * @param clientId 
+     */
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+    
+    /**
+     * 
+     * @param arcadeName 
+     */
+    public void setArcadeName(String arcadeName) {
+        this.arcadeName = arcadeName;
+    }
+
+    /**
+     * 
+     * @param defaultRegion 
+     */
+    public void setDefaultRegion(String defaultRegion) {
+        this.defaultRegion = defaultRegion;
+    }
+
+    //
+    // General Methods
+    //
     
     /**
      * 
      * @return 
      */
-    public String getAccountId() {
-        return this.accountId;
-    }
+    public ASDReply registerService() {
+        ASDReply ar = new ASDReply();
+        
+        return ar;
+    }   // End of registerService
     
     /**
      * 
@@ -157,13 +252,11 @@ public class ASD {
         throws AwsServiceException, SdkClientException {
         boolean debug = true;
         ASDReply ar = new ASDReply();
-        StringBuilder sb = new StringBuilder();
-                
-        sb.append("/ASD/");
-        sb.append(sm.getAccountId()).append("/");
-        sb.append(sm.getArcadeName()).append("/");
-        sb.append(sm.getServiceName()).append("/service-status.json");
-        String key = sb.toString();
+        
+        String key = Common.genParameterKey(sm);
+        
+        
+        //String key = sb.toString();
         String value = sm.toJson();
         
         /*
