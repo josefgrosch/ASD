@@ -1,0 +1,67 @@
+{
+    "aws_account": "023960176222",
+    "client": "joes_pretty_good_isp",
+    "arcade_name": "evil_dead.arc",
+    "services": [
+        {
+            "service": "aoatvb2smsdb",
+            "conn_string": "http://www.example.com/aoatvb2smsdb"
+        },
+        {
+            "service": "aoatvb2testdb",
+            "conn_string": "http://www.example.com/aoatvb2testdb"
+        },
+        {
+            "service": "apilb",
+            "conn_string": "http://www.example.com/apilb"
+        },
+        {
+            "service": "comp-server",
+            "conn_string": "http://www.example.com/comp-server"
+        },
+        {
+            "service": "factortags",
+            "conn_string": "http://www.example.com/factortags"
+        },
+        {
+            "service": "iverson",
+            "conn_string": "http://www.example.com/iverson"
+        },
+        {
+            "service": "maxwell",
+            "conn_string": "http://www.example.com/maxwell"
+        },
+        {
+            "service": "memcache",
+            "conn_string": "http://www.example.com/memcache"
+        },
+        {
+            "service": "reportgeneration",
+            "conn_string": "http://www.example.com/reportgeneration"
+        },
+        {
+            "service": "rest-api-global-tasks",
+            "conn_string": "http://www.example.com/rest-api-global-tasks"
+        },
+        {
+            "service": "rest-api-server",
+            "conn_string": "http://www.example.com/rest-api-server"
+        },
+        {
+            "service": "securitymaster",
+            "conn_string": "http://www.example.com/securitymaster"
+        },
+        {
+            "service": "snapshots",
+            "conn_string": "http://www.example.com/snapshots"
+        },
+        {
+            "service": "taxlot-data",
+            "conn_string": "http://www.example.com/taxlot-data"
+        },
+        {
+            "service": "transactions",
+            "conn_string": "http://www.example.com/transactions"
+        }
+    ]
+}
