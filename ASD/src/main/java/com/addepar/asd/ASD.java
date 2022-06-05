@@ -60,6 +60,7 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ssm.SsmClient;
 import software.amazon.awssdk.services.ssm.model.PutParameterRequest;
 import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
+import com.addepar.asd.ASDMissingValuesException;
 
 
 /**
@@ -90,9 +91,29 @@ public class ASD {
     private String arcadeName  = "";
     
     /**
+     * 
+     */
+    private String serviceName = "";
+    
+    /**
      * The <b>defaultRegion</b> is the AWS region the arcade is running in.
      */
     private String defaultRegion = "";
+    
+    /**
+     *
+     */
+    private boolean fullyLoaded = true;
+    
+    /**
+     * 
+     */
+    private String emptyField = "";
+    
+    /**
+     * 
+     */
+    private ServiceMessage sm = null;
     
     //
     // Constructors
@@ -121,22 +142,74 @@ public class ASD {
     /**
      * 
      * @param sm 
+     * @throws com.addepar.asd.ASDMissingValuesException 
      */
-    public ASD(ServiceMessage sm) {
+    public ASD(ServiceMessage sm) throws ASDMissingValuesException {
         this();
         
-        this.accountId  = sm.getAccountId();
-        this.arcadeName = sm.getServiceName();
+        this.sm = sm;
+
+        // account id
+        if ((this.sm.getAccountId().length() > 0) || 
+            (this.fullyLoaded == true)) {
+            this.accountId  = this.sm.getAccountId();
+        } else {
+            this.fullyLoaded = false;
+            this.emptyField = "account id";
+        }
+
+        // client id
+        if ((this.sm.getClientId().length() > 0) || 
+           (this.fullyLoaded == true)) {
+            this.clientId  = this.sm.getClientId();
+        } else {
+            this.fullyLoaded = false;
+            this.emptyField = "cliend id";
+        }
+
+        // client name
+        if ((this.sm.getClientName().length() > 0) || 
+           (this.fullyLoaded == true)) {
+            this.clientName  = this.sm.getClientName();
+        } else {
+            this.fullyLoaded = false;
+            this.emptyField = "client name";
+        }
+
+        // arcade name
+        if ((this.sm.getArcadeName().length() > 0) || 
+           (this.fullyLoaded == true)) {
+            this.arcadeName  = this.sm.getArcadeName();
+        } else {
+            this.fullyLoaded = false;
+            this.emptyField = "arcade name";
+        }
+
+        // service name
+        if ((this.sm.getServiceName().length() > 0) || 
+           (this.fullyLoaded == true)) {
+            this.serviceName  = this.sm.getServiceName();
+        } else {
+            this.fullyLoaded = false;
+            this.emptyField = "service name";
+        }
+
+        
+        if (this.fullyLoaded == false) {
+            throw new ASDMissingValuesException("Field "+this.emptyField+ "is empty. Try again");
+        }
+        
     }   // End of class constuctor with a ServiceMessage
     
     /**
      * 
      * @param arcadeName 
      */
+    /*
     public ASD(String arcadeName) {
         this();
     }
-
+*/
     //
     // Get methods
     //
@@ -253,10 +326,7 @@ public class ASD {
         boolean debug = true;
         ASDReply ar = new ASDReply();
         
-        String key = Common.genParameterKey(sm);
-        
-        
-        //String key = sb.toString();
+        String key   = Common.genParameterKey(sm);
         String value = sm.toJson();
         
         /*
@@ -325,6 +395,23 @@ public class ASD {
         
         return sb.toString();
     }   // End of getAllRegisteredServices
+    
+    /**
+     * 
+     * @return 
+     */
+    public String toJson() {
+        ServiceMessage localSm = null;
+        
+        if (this.sm == null) {
+            
+        } else {
+            localSm = this.sm;
+        }
+        
+        String outStr = Common.toJson(localSm);
+        return outStr;
+    }
 }   // End of class ASD
 
 
