@@ -54,32 +54,21 @@ package com.addepar.asd;
 **                                Imports
 **
 **************************************************************************/
+import org.json.JSONException;
 import org.json.JSONObject;
 
+// ASD/023960176222/joes_pretty_good_ISP/dead_sky.arc/iverson.json
+// ASD/\<AWS account ID\>/\<client\>/\<arcade\>/\<service\>.json
 
 /**
- *
+ * 
+ * 
+ * 
  * @author Bob Dobbs
  */
 public class ServiceMessage {
-    // ASD/023960176222/joes_pretty_good_ISP/dead_sky.arc/iverson.json
-    // ASD/<AWS account ID>/<client>/<arcade>/<service>.json
+   
 
-    /*
-
-      {
-      "account_name": "",
-      "arcade_name": "",
-      "service_name": "",
-      "connection_string":"",
-      "register_service":"",
-      "unregister_service":"",
-      "locate_service": "",
-      "service_status":""
-      }
-
-     */
-    
     /**
      * 
      */
@@ -109,11 +98,17 @@ public class ServiceMessage {
      * 
      */
     private String connectionString = "";
+    
+    /**
+     * 
+     */
+    private String parameterKey = "";
 
     /**
      * 
      */
     private boolean serviceStatus = false;
+    
     
     //
     // Constructor methods
@@ -128,25 +123,25 @@ public class ServiceMessage {
     
     /**
      * 
-     * @param serviceName
+     * @param accountId
+     * @param clientName
      * @param arcadeName
-     * @param registerService 
-     * @param unregisterService 
-     * @param locateService 
+     * @param serviceName
      */
     public ServiceMessage(
-            String  serviceName,
-            String  arcadeName,
-            boolean registerService,
-            boolean unregisterService,
-            boolean locateService) {
+            String accountId,
+            String clientName,
+            String arcadeName,
+            String serviceName) {
         
         this();
         
-        this.serviceName        = serviceName;
-        this.arcadeName         = arcadeName;
+        this.accountId   = accountId;
+        this.clientName  = clientName;
+        this.arcadeName  = arcadeName;
+        this.serviceName = serviceName;
         
-    }   // End of constructor
+    }   // End of constructor - parameter
 
     /**
      * 
@@ -155,18 +150,12 @@ public class ServiceMessage {
     public ServiceMessage(ServiceMessage sm) {
         this();
         
-        this.serviceName        = sm.getServiceName();
-        this.arcadeName         = sm.getArcadeName();
+        this.accountId   = sm.getAccountId();
+        this.clientName  = sm.getClientName();
+        this.arcadeName  = sm.getArcadeName();
+        this.serviceName = sm.getServiceName();
         
-    }   // End of constructor
-    
-    /**
-     * 
-     * @param jStr 
-     */
-    //public ServiceMessage(String jStr) {
-    //    this();
-    //}
+    }   // End of constructor - ServiceMessage
     
     /**
      * 
@@ -174,7 +163,17 @@ public class ServiceMessage {
      */
     public ServiceMessage(JSONObject jObj) {
         this();
-    }
+        
+        try {
+            this.accountId   = jObj.getString("account_id");
+            this.clientName  = jObj.getString("client_name");
+            this.arcadeName  = jObj.getString("arcade_name");
+            this.serviceName = jObj.getString("service_name");
+        }
+        catch(JSONException ex) {
+            System.out.println(ex);
+        }
+    }   // End of constructor - json
     
     //
     // Get methods
@@ -228,7 +227,17 @@ public class ServiceMessage {
         return this.connectionString;
     }
 
-    
+    /**
+     * 
+     * @return 
+     */
+    public String getParameterKey() {
+        if (parameterKey.length() == 0) {
+            this.parameterKey = Common.genParameterKey(this);
+        }
+        
+        return this.parameterKey;
+    }
 
     /**
      * 
@@ -238,6 +247,7 @@ public class ServiceMessage {
         return this.serviceStatus;
     }
 
+    
     //
     // Set methods
     //
@@ -246,7 +256,7 @@ public class ServiceMessage {
      * 
      * @param accountId 
      */
-    public void setAccountName(String accountId) {
+    public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
 
@@ -298,6 +308,10 @@ public class ServiceMessage {
         this.serviceStatus = status;
     }
 
+    //
+    // 
+    //
+    
     /**
      * 
      * @return 

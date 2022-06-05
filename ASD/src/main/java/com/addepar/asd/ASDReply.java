@@ -48,14 +48,13 @@
 **************************************************************************/
 package com.addepar.asd;
 
-import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
-
 
 /**************************************************************************
 **
 **                                Imports
 **
 **************************************************************************/
+import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
 
 
 /**
@@ -63,6 +62,10 @@ import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
  * @author Bob Dobbs
  */
 public class ASDReply {
+    
+    /**
+     * 
+     */
     private PutParameterResponse ppr = null;
     
     /**
@@ -80,7 +83,11 @@ public class ASDReply {
         this();
         
         this.ppr = ppr;
-    }
+    }   // End of class constructor - PutParameterResponse
+    
+    //
+    // Get methods
+    //
     
     /**
      * 
@@ -89,6 +96,10 @@ public class ASDReply {
     public PutParameterResponse getPprResponse() {
         return this.ppr;
     }
+    
+    //
+    // Set methods
+    //
     
     /**
      * 

@@ -8,13 +8,13 @@ package com.addepar.asd;
  *
  * @author josef.grosch
  */
-public class ASDException {
+public class ASDMissingValuesException extends Exception {
 
     /**
      * Creates a new instance of <code>ASDException</code> without detail
      * message.
      */
-    public ASDException() {
+    public ASDMissingValuesException() {
     }
 
     /**
@@ -23,7 +23,7 @@ public class ASDException {
      *
      * @param msg the detail message.
      */
-    public ASDException(String msg) {
+    public ASDMissingValuesException(String msg) {
         super();
     }
 }
