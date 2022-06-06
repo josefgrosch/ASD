@@ -61,6 +61,11 @@ import software.amazon.awssdk.services.ssm.SsmClient;
 import software.amazon.awssdk.services.ssm.model.PutParameterRequest;
 import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
 import com.addepar.asd.ASDMissingValuesException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
+import software.amazon.awssdk.services.ssm.model.ParameterMetadata;
 
 
 /**
@@ -115,7 +120,14 @@ public class ASD {
      */
     private ServiceMessage sm = null;
     
-    //
+    /*
+    *
+    */
+    private boolean flux_capacitor = false;
+    /*
+    *
+    */
+//
     // Constructors
     //
     
@@ -137,6 +149,20 @@ public class ASD {
         
         System.setProperty("aws.region", this.defaultRegion);
         
+        String head = System.getenv("EASTER_ISLAND");
+        if (head != null) {
+            this.flux_capacitor = true;
+            URL resource = getClass().getClassLoader().getResource("quotes.json");
+            if (resource == null) {   
+                throw new IllegalArgumentException("file not found!");
+            } else {
+
+            // failed if files have whitespaces or special characters
+            //return new File(resource.getFile());
+
+            //return new File(resource.toURI());
+            }
+        }   // End of Head!
     }   // End of default class constructor
     
     /**
@@ -375,6 +401,20 @@ public class ASD {
      */
     public ASDReply locateService(ServiceMessage sm) {
         ASDReply ar = new ASDReply();
+        Region region = Region.US_EAST_2;
+        
+        SsmClient ssmClient = SsmClient.builder()
+                .region(region)
+                .credentialsProvider(ProfileCredentialsProvider.create())
+                .build();
+
+        ArrayList al = Common.getAllParameters(ssmClient);
+        Iterator alIterator = al.iterator();
+        while (alIterator.hasNext()) {
+            ParameterMetadata  pm = (ParameterMetadata) alIterator.next();
+        }
+        
+        ssmClient.close();
         
         return ar;
     }   // End of locateService
