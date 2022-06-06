@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Bob Dobbs
+ * @author Josef Grosch < josef.grosch@addepar.com >
  */
 public class Example03 {
 

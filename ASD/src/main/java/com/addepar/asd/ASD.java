@@ -61,16 +61,14 @@ import software.amazon.awssdk.services.ssm.SsmClient;
 import software.amazon.awssdk.services.ssm.model.PutParameterRequest;
 import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
 import com.addepar.asd.ASDMissingValuesException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.services.ssm.model.ParameterMetadata;
 
-
 /**
  *
- * @author Bob Dobbs <bob.dobbs@addepar.com>
+ * @author Josef Grosch < josef.grosch@addepar.com >
  * @version 0.1
  */
 public class ASD {
@@ -120,13 +118,10 @@ public class ASD {
      */
     private ServiceMessage sm = null;
     
-    /*
-    *
-    */
+    
     private boolean flux_capacitor = false;
-    /*
-    *
-    */
+    
+  
 //
     // Constructors
     //
@@ -151,17 +146,8 @@ public class ASD {
         
         String head = System.getenv("EASTER_ISLAND");
         if (head != null) {
-            this.flux_capacitor = true;
-            URL resource = getClass().getClassLoader().getResource("quotes.json");
-            if (resource == null) {   
-                throw new IllegalArgumentException("file not found!");
-            } else {
-
-            // failed if files have whitespaces or special characters
-            //return new File(resource.getFile());
-
-            //return new File(resource.toURI());
-            }
+            //writeNoseyString();
+            int i = 0;
         }   // End of Head!
     }   // End of default class constructor
     
@@ -452,6 +438,48 @@ public class ASD {
         String outStr = Common.toJson(localSm);
         return outStr;
     }
+    /*
+    private void writeNoseyString() {
+        this.flux_capacitor = true;
+        StringBuilder sb = new StringBuilder();
+        try {
+            //JSONParser parser = new JSONParser();
+            URL resource = getClass().getClassLoader().getResource("quotes.json");
+            if (resource == null) {   
+                throw new IllegalArgumentException("file not found!");
+            } else {
+                
+                Object obj = parser.parse(new FileReader(new File(resource.getFile())));
+                JSONObject jsonObject = (JSONObject)obj;
+         
+                // failed if files have whitespaces or special characters
+                // File qFile = new File(resource.getFile());
+                // return new File(resource.toURI());
+                
+                JSONArray arr = jsonObject.getJSONArray("quotes");
+                int arrSize = arr.length();
+
+                Random random = new Random();
+                int maxRandom = 20000;
+                int minRandom = 0;
+        
+                int randomNum = random.nextInt(maxRandom - minRandom) + minRandom;
+                int index = (randomNum % arrSize);
+                sb.append("<!--\n\n");
+                String oStr = arr.getString(index);
+                sb.append("    ");
+                sb.append(oStr);
+                sb.append("\n\n    -->\n");
+                String qStr = sb.toString();
+                
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ASD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | ParseException ex) {
+            Logger.getLogger(ASD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    */
 }   // End of class ASD
 
 
