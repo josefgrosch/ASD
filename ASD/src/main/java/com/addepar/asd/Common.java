@@ -67,7 +67,7 @@ import software.amazon.awssdk.services.ssm.model.SsmException;
 
 /**
  *
- * @author Bob Dobbs
+ * @author Josef Grosch < josef.grosch@addepar.com >
  */
 public class Common {
     /**

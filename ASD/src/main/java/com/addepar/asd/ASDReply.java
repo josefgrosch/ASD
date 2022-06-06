@@ -59,7 +59,7 @@ import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
 
 /**
  *
- * @author Bob Dobbs
+ * @author Josef Grosch < josef.grosch@addepar.com >
  */
 public class ASDReply {
     

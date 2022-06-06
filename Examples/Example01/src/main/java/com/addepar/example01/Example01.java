@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * 
  * This example shows how to initlize a ServiceMessage.
  * 
- * @author Bob Dobbs
+ * @author Josef Grosch < josef.grosch@addepar.com >
  */
 public class Example01 {
 

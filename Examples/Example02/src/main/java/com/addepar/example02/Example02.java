@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author josef.grosch
+ * @author Josef Grosch < josef.grosch@addepar.com >
  */
 public class Example02 {
 
