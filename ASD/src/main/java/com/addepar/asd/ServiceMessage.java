@@ -109,6 +109,7 @@ public class ServiceMessage {
      */
     private boolean serviceStatus = false;
     
+    private String msg = "";
     
     //
     // Constructor methods
@@ -247,6 +248,9 @@ public class ServiceMessage {
         return this.serviceStatus;
     }
 
+    public String getMsg() {
+        return this.msg;
+    }
     
     //
     // Set methods
@@ -308,6 +312,18 @@ public class ServiceMessage {
         this.serviceStatus = status;
     }
 
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+    
+    /**
+     * 
+     * @param parameterKey 
+     */
+    public void setParameterKey(String parameterKey) {
+        this.parameterKey = parameterKey;
+    }
+    
     //
     // 
     //

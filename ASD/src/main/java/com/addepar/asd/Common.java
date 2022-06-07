@@ -98,6 +98,7 @@ public class Common {
         jObj.put("service_name",       sm.getServiceName());
         jObj.put("connection_string",  sm.getConnectionString());
         jObj.put("service_status",     sm.getServiceStatus());
+        jObj.put("msg",                sm.getMsg());
         
         return jObj.toString(4);
     }   // End of toJson

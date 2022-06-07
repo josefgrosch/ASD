@@ -38,10 +38,23 @@ public class Example01 {
         sm1.setConnectionString(connectionString);
         String json1 = sm1.toJson();
         
+        //
+        // This is a naked ASD object ie. All the fields are blank
+        //
         ASD asd1 = new ASD();
+        //String outJson1 = asd1.toJson();
+        System.out.println("\nEmpty ASD");
+        //System.out.println(outJson1);
         
+        //
+        // This ASD object has all its fields fully populated by
+        // passing it a populted ServiceMessage
+        //
         try {
             ASD asd2 = new ASD(sm1);
+            String outJson2 = asd2.toJson();
+            System.out.println("\nFully populated ASD");
+            System.out.println(outJson2);
         } catch (ASDMissingValuesException ex) {
             Logger.getLogger(Example01.class.getName()).log(Level.SEVERE, null, ex);
         }
