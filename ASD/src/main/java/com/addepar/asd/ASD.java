@@ -63,6 +63,7 @@ import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
 import com.addepar.asd.ASDMissingValuesException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import org.json.JSONObject;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.services.ssm.model.ParameterMetadata;
 
@@ -122,7 +123,7 @@ public class ASD {
     private boolean flux_capacitor = false;
     
   
-//
+    //
     // Constructors
     //
     
@@ -161,6 +162,10 @@ public class ASD {
         
         this.sm = sm;
 
+        //
+        // Check if the required fields have been populated.
+        //
+        
         // account id
         if ((this.sm.getAccountId().length() > 0) || 
             (this.fullyLoaded == true)) {
@@ -206,7 +211,7 @@ public class ASD {
             this.emptyField = "service name";
         }
 
-        
+        // If there are empty fields, that is a problem.
         if (this.fullyLoaded == false) {
             throw new ASDMissingValuesException("Field "+this.emptyField+ "is empty. Try again");
         }
@@ -215,13 +220,12 @@ public class ASD {
     
     /**
      * 
-     * @param arcadeName 
+     * @param jObject 
      */
-    /*
-    public ASD(String arcadeName) {
+    public  ASD(JSONObject jObject) {
         this();
-    }
-*/
+    }   // End of constructor - json object
+    
     //
     // Get methods
     //
