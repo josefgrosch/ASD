@@ -65,7 +65,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import org.json.JSONObject;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
+import software.amazon.awssdk.services.ssm.model.GetParameterRequest;
+import software.amazon.awssdk.services.ssm.model.GetParameterResponse;
 import software.amazon.awssdk.services.ssm.model.ParameterMetadata;
+import software.amazon.awssdk.services.ssm.model.SsmException;
 
 /**
  *
@@ -387,9 +390,52 @@ public class ASD {
     /**
      * 
      * @param sm
+     * @return
+     * @throws ASDKeyNotFoundException 
+     */
+    public ASDReply getParameterValue(ServiceMessage sm) throws ASDKeyNotFoundException  {
+        ASDReply asdr = new ASDReply();
+        String paraName = sm.getParameterKey();
+        GetParameterResponse parameterResponse = null;
+        
+        try {
+        Region region = Region.US_EAST_2;
+        SsmClient ssmClient = SsmClient.builder()
+                .region(region)
+                .credentialsProvider(ProfileCredentialsProvider.create())
+                .build(); 
+       
+        GetParameterRequest parameterRequest = GetParameterRequest.builder()
+                .name(paraName)
+                .build();
+
+        parameterResponse = ssmClient.getParameter(parameterRequest);
+        //System.out.println("The parameter value is "+parameterResponse.parameter().value());
+
+        String connStr = parameterResponse.parameter.name;
+        SsmResponseMetadata = parameterResponse.responseMetadata;
+        int statusCode = parameterResponse.sdkHttpResponse.statusCode;
+
+
+        ssmClient.close();
+        } catch (AwsServiceException | SdkClientException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        if (parameterResponse.parameter().value().length() <= 0) {
+            throw new ASDKeyNotFoundException("Key "+paraName+" not found.");
+        }
+        
+        return asdr;
+    }   // End of lo
+        
+   
+    /**
+     * 
+     * @param sm
      * @return 
      */
-    public ASDReply locateService(ServiceMessage sm) {
+    public ASDReply locateServices(ServiceMessage sm) {
         ASDReply ar = new ASDReply();
         Region region = Region.US_EAST_2;
         

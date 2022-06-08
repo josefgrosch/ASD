@@ -55,6 +55,8 @@ package com.addepar.asd;
 **
 **************************************************************************/
 import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
+import software.amazon.awssdk.services.ssm.model.SsmResponseMetadata;
+import software.amazon.awssdk.http.*;
 
 
 /**
@@ -67,7 +69,17 @@ public class ASDReply {
      * 
      */
     private PutParameterResponse ppr = null;
+
+    /**
+     * 
+     */
+    private SsmResponseMetadata rm = null;
     
+    /**
+     * 
+     */
+    private SdkHttpFullResponse ht = null;
+
     /**
      * 
      */
@@ -97,6 +109,22 @@ public class ASDReply {
         return this.ppr;
     }
     
+    /**
+     * 
+     * @return 
+     */
+    public SsmResponseMetadata getResponseMetadata() {
+        return this.rm;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    private SdkHttpFullResponse getFullResponse() {
+        return this.ht;
+    }
+
     //
     // Set methods
     //
@@ -108,6 +136,23 @@ public class ASDReply {
     public void setPprResponse(PutParameterResponse ppr) {
         this.ppr = ppr;
     }
+
+    /**
+     * 
+     * @param rm 
+     */
+    public void setResponseMetadate(SsmResponseMetadata rm) {
+        this.rm = rm;
+    }
+
+    /**
+     * 
+     * @param ht 
+     */
+    public void setFullResponse(SdkHttpFullResponse ht) {
+        this.ht = ht;
+    }
+
 }   // End of class
 
 

@@ -78,6 +78,44 @@ public class Common {
     public final static String DEFAULT_REGION = "us_east_2";
     
     /**
+     * This static field defines a return value that designates a
+     * successful return.
+     */
+    public final static int OK        = 0; // It all worked out
+    
+    /**
+     * This static field defines a return value the designaes an
+     * unsuccessfule return.
+     * 
+     */
+    public final static int NOT_OK    = 1; // Not so much
+    
+    /**
+     * This stat
+     */
+    public final static int SKIP      = 2; // We are skipping this block/func
+    
+    /**
+     * 
+     */
+    public final static int NOT_YET   = 3; // This block/func is not ready
+    
+    /**
+     * 
+     */
+    public final static int FAIL      = 4; // It all went to hell in a handbasket
+    
+    /**
+     * 
+     */
+    public final static int NOT_FOUND = 5; // Could not find what we were looking for
+    
+    /**
+     * 
+     */
+    public final static int FOUND     = 6; // Found my keys
+
+    /**
      * The method <b>toJson</b> takes a fully populated 
      * {@link com.addepar.asd.ServiceMessage ServiceMessage} and builds a 
      * correctly formatted json string.
