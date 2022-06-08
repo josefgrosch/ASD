@@ -413,9 +413,9 @@ public class ASD {
         parameterResponse = ssmClient.getParameter(parameterRequest);
         //System.out.println("The parameter value is "+parameterResponse.parameter().value());
 
-        //String connStr = parameterResponse.parameter.name;
-        //SsmResponseMetadata ssmM = parameterResponse.responseMetadata;
-        //int statusCode = parameterResponse.sdkHttpResponse.statusCode;
+        String connStr = parameterResponse.parameter().value();
+        SsmResponseMetadata ssmM = parameterResponse.responseMetadata();
+        String statusCode = String.valueOf(parameterResponse.sdkHttpResponse().statusCode());
 
 
         ssmClient.close();
