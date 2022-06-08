@@ -83,6 +83,16 @@ public class ASDReply {
     /**
      * 
      */
+    private String connStr = "";
+    
+    /**
+     * 
+     */
+    private String statusCode = "";
+    
+    /**
+     * 
+     */
     public ASDReply() {
         super();
     }   // End of default class constructor
