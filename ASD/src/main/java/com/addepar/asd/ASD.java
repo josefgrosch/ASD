@@ -69,6 +69,7 @@ import software.amazon.awssdk.services.ssm.model.GetParameterRequest;
 import software.amazon.awssdk.services.ssm.model.GetParameterResponse;
 import software.amazon.awssdk.services.ssm.model.ParameterMetadata;
 import software.amazon.awssdk.services.ssm.model.SsmException;
+import software.amazon.awssdk.services.ssm.model.SsmResponseMetadata;
 
 /**
  *
@@ -412,9 +413,9 @@ public class ASD {
         parameterResponse = ssmClient.getParameter(parameterRequest);
         //System.out.println("The parameter value is "+parameterResponse.parameter().value());
 
-        String connStr = parameterResponse.parameter.name;
-        SsmResponseMetadata = parameterResponse.responseMetadata;
-        int statusCode = parameterResponse.sdkHttpResponse.statusCode;
+        //String connStr = parameterResponse.parameter.name;
+        //SsmResponseMetadata ssmM = parameterResponse.responseMetadata;
+        //int statusCode = parameterResponse.sdkHttpResponse.statusCode;
 
 
         ssmClient.close();
