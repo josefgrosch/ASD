@@ -129,7 +129,7 @@ public class Common {
         Instant now = Instant.now();
         String TimeNow = now.toString();
         
-        jObj.put("gen_time_epoch",     TimeNow);
+        jObj.put("gen_time",           TimeNow);
         jObj.put("account_id",         sm.getAccountId());
         jObj.put("client_name",        sm.getClientName());
         jObj.put("arcade_name",        sm.getArcadeName());
