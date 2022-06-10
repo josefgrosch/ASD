@@ -48,6 +48,10 @@
 **************************************************************************/
 package com.addepar.asd;
 
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 
 /**************************************************************************
 **
@@ -58,11 +62,15 @@ package com.addepar.asd;
 
 /**
  *
- * @author Josef Grosch < josef.grosch@addepar.com >
+ * @author Josef Grosch -- josef.grosch@addepar.com 
  */
 public class Utility {
     
-     public static ServiceMessage initTestMessage() {
+    /**
+     * 
+     * @return 
+     */
+    public static ServiceMessage initTestMessage() {
         String accountId = "123456789012";
         String clientName = "PicklesUnlimited";
         String clientId   = "666";
@@ -82,7 +90,28 @@ public class Utility {
         sm1.setParameterKey(pKey);
         
         return sm1;
-    }
+    }   // End of initTestMessage
+     
+    /**
+     * 
+     * @param fileName
+     * @return
+     * @throws URISyntaxException 
+     */
+    public File getFileFromResource(String fileName) 
+            throws URISyntaxException {
+
+        File fObj = null;
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resource = classLoader.getResource(fileName);
+        if (resource == null) {
+            throw new IllegalArgumentException("file not found! " + fileName);
+        } else {
+            fObj = new File(resource.toURI());
+        }
+        
+        return fObj;
+    }   // End of getFileFromResource
 }
 
 
