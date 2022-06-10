@@ -3,6 +3,7 @@ package com.addepar.example01;
 
 import com.addepar.asd.ASD;
 import com.addepar.asd.ASDMissingValuesException;
+//import com.addepar.asd.ASDMissingValuesException;
 import com.addepar.asd.ServiceMessage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
