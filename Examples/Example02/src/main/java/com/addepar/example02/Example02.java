@@ -10,7 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * This program demenstrats how to register a service.
+ * 
  * @author Josef Grosch < josef.grosch@addepar.com >
  */
 public class Example02 {

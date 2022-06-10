@@ -73,12 +73,12 @@ public class ASDReply {
     /**
      * 
      */
-    private SsmResponseMetadata rm = null;
+    private SsmResponseMetadata responseMetadata = null;
     
     /**
      * 
      */
-    private SdkHttpFullResponse ht = null;
+    private SdkHttpFullResponse fullResponse = null;
 
     /**
      * 
@@ -124,17 +124,33 @@ public class ASDReply {
      * @return 
      */
     public SsmResponseMetadata getResponseMetadata() {
-        return this.rm;
+        return this.responseMetadata;
     }
 
     /**
      * 
      * @return 
      */
-    private SdkHttpFullResponse getFullResponse() {
-        return this.ht;
+    public SdkHttpFullResponse getFullResponse() {
+        return this.fullResponse;
     }
 
+    /**
+     * 
+     * @return 
+     */
+    public String getConnectionString() {
+        return this.connStr;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public String getStatusCode() {
+        return this.statusCode;
+    }
+    
     //
     // Set methods
     //
@@ -152,17 +168,32 @@ public class ASDReply {
      * @param rm 
      */
     public void setResponseMetadate(SsmResponseMetadata rm) {
-        this.rm = rm;
+        this.responseMetadata = rm;
     }
 
     /**
      * 
-     * @param ht 
+     * @param fr
      */
-    public void setFullResponse(SdkHttpFullResponse ht) {
-        this.ht = ht;
+    public void setFullResponse(SdkHttpFullResponse fr) {
+        this.fullResponse = fr;
     }
 
+    /**
+     * 
+     * @param connStr 
+     */
+    public void setConnectionString(String connStr) {
+        this.connStr = connStr;
+    }
+    
+    /**
+     * 
+     * @param statusCode 
+     */
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
+    }
 }   // End of class
 
 

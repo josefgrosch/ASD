@@ -411,24 +411,30 @@ public class ASD {
                 .build();
 
         parameterResponse = ssmClient.getParameter(parameterRequest);
-        //System.out.println("The parameter value is "+parameterResponse.parameter().value());
 
-        String connStr = parameterResponse.parameter().value();
+        String jStr = parameterResponse.parameter().value();
+        if (parameterResponse.parameter().value().length() <= 0) {
+            throw new ASDKeyNotFoundException("Key "+paraName+" not found.");
+        }
+        
+        JSONObject jObj = new JSONObject(jStr);
+        String connStr = jObj.getString("connection_string");
+        asdr.setConnectionString(connStr);
+        
         SsmResponseMetadata ssmM = parameterResponse.responseMetadata();
-        String statusCode = String.valueOf(parameterResponse.sdkHttpResponse().statusCode());
-
+        asdr.setResponseMetadate(ssmM);
+        
+        String statusCode = String.valueOf(parameterResponse
+                .sdkHttpResponse().statusCode());
+        asdr.setStatusCode(statusCode);
 
         ssmClient.close();
         } catch (AwsServiceException | SdkClientException ex) {
             System.out.println(ex.getMessage());
         }
         
-        if (parameterResponse.parameter().value().length() <= 0) {
-            throw new ASDKeyNotFoundException("Key "+paraName+" not found.");
-        }
-        
         return asdr;
-    }   // End of lo
+    }   // End of getParameterValue
         
    
     /**

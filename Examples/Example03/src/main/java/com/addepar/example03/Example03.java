@@ -12,7 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * This program demenstarits how to register multiple services.
+ * 
  * @author Josef Grosch < josef.grosch@addepar.com >
  */
 public class Example03 {
