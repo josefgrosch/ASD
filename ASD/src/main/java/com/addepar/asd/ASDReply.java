@@ -61,7 +61,7 @@ import software.amazon.awssdk.http.*;
 
 /**
  *
- * @author Josef Grosch < josef.grosch@addepar.com >
+ * @author Josef Grosch -- josef.grosch@addepar.com 
  */
 public class ASDReply {
     
@@ -89,6 +89,11 @@ public class ASDReply {
      * 
      */
     private String statusCode = "";
+    
+    /**
+     * 
+     */
+    private String msg = "";
     
     /**
      * 
@@ -151,6 +156,14 @@ public class ASDReply {
         return this.statusCode;
     }
     
+    /**
+     * 
+     * @return 
+     */
+    public String getMsg() {
+        return this.msg;
+    }
+    
     //
     // Set methods
     //
@@ -194,6 +207,16 @@ public class ASDReply {
     public void setStatusCode(String statusCode) {
         this.statusCode = statusCode;
     }
+    
+    /**
+     * 
+     * @param msg 
+     */
+    public void setMsg(String msg) {
+        this.msg = msg;
+        
+    }
+    
 }   // End of class
 
 

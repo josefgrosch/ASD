@@ -54,26 +54,35 @@ package com.addepar.asd;
 **                                Imports
 **
 **************************************************************************/
+import com.addepar.asd.ASDMissingValuesException;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.commons.io.FileUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.awscore.exception.AwsServiceException;
 import software.amazon.awssdk.core.exception.SdkClientException;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ssm.SsmClient;
-import software.amazon.awssdk.services.ssm.model.PutParameterRequest;
-import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
-import com.addepar.asd.ASDMissingValuesException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import org.json.JSONObject;
-import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.services.ssm.model.GetParameterRequest;
 import software.amazon.awssdk.services.ssm.model.GetParameterResponse;
 import software.amazon.awssdk.services.ssm.model.ParameterMetadata;
-import software.amazon.awssdk.services.ssm.model.SsmException;
+import software.amazon.awssdk.services.ssm.model.PutParameterRequest;
+import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
 import software.amazon.awssdk.services.ssm.model.SsmResponseMetadata;
+
 
 /**
  *
- * @author Josef Grosch < josef.grosch@addepar.com >
+ * @author Josef Grosch -- josef.grosch@addepar.com
  * @version 0.1
  */
 public class ASD {
@@ -124,7 +133,7 @@ public class ASD {
     private ServiceMessage sm = null;
     
     
-    private boolean flux_capacitor = false;
+    private String fluxCapacitor = "";
     
   
     //
@@ -151,8 +160,7 @@ public class ASD {
         
         String head = System.getenv("EASTER_ISLAND");
         if (head != null) {
-            //writeNoseyString();
-            int i = 0;
+            this.fluxCapacitor = writeNoseyString();
         }   // End of Head!
     }   // End of default class constructor
     
@@ -219,7 +227,10 @@ public class ASD {
         if (this.fullyLoaded == false) {
             throw new ASDMissingValuesException("Field "+this.emptyField+ "is empty. Try again");
         }
-        
+    
+        if (this.fluxCapacitor.length() > 0) {
+            this.sm.setMsg(this.fluxCapacitor);
+        }
     }   // End of class constuctor with a ServiceMessage
     
     /**
@@ -329,9 +340,9 @@ public class ASD {
      * @return 
      */
     public ASDReply registerService() {
-        ASDReply ar = new ASDReply();
+        ASDReply asdr = new ASDReply();
         
-        return ar;
+        return asdr;
     }   // End of registerService
     
     /**
@@ -344,7 +355,7 @@ public class ASD {
     public ASDReply registerService(ServiceMessage sm) 
         throws AwsServiceException, SdkClientException {
         boolean debug = true;
-        ASDReply ar = new ASDReply();
+        ASDReply asdr = new ASDReply();
         
         String key   = Common.genParameterKey(sm);
         String value = sm.toJson();
@@ -372,9 +383,12 @@ public class ASD {
             System.out.println(ppr.toString());
         }
         
-        ar.setPprResponse(ppr);
+        asdr.setPprResponse(ppr);
+        if (this.fluxCapacitor.length() > 0) {
+            asdr.setMsg(this.fluxCapacitor);
+        }
         
-        return ar;
+        return asdr;
     }   // End of registerService
     
     /**
@@ -383,9 +397,13 @@ public class ASD {
      * @return 
      */
     public ASDReply unregisterService(ServiceMessage sm) {
-        ASDReply ar = new ASDReply();
+        ASDReply asdr = new ASDReply();
         
-        return ar;
+         if (this.fluxCapacitor.length() > 0) {
+            asdr.setMsg(this.fluxCapacitor);
+        }
+        
+         return asdr;
     }   // End of unregisterService
     
     /**
@@ -433,6 +451,9 @@ public class ASD {
             System.out.println(ex.getMessage());
         }
         
+        if (this.fluxCapacitor.length() > 0) {
+            asdr.setMsg(this.fluxCapacitor);
+        }
         return asdr;
     }   // End of getParameterValue
         
@@ -443,7 +464,7 @@ public class ASD {
      * @return 
      */
     public ASDReply locateServices(ServiceMessage sm) {
-        ASDReply ar = new ASDReply();
+        ASDReply asdr = new ASDReply();
         Region region = Region.US_EAST_2;
         
         SsmClient ssmClient = SsmClient.builder()
@@ -459,7 +480,11 @@ public class ASD {
         
         ssmClient.close();
         
-        return ar;
+        if (this.fluxCapacitor.length() > 0) {
+            asdr.setMsg(this.fluxCapacitor);
+        }
+        
+        return asdr;
     }   // End of locateService
     
     /**
@@ -495,48 +520,61 @@ public class ASD {
         String outStr = Common.toJson(localSm);
         return outStr;
     }
-    /*
-    private void writeNoseyString() {
-        this.flux_capacitor = true;
-        StringBuilder sb = new StringBuilder();
+    
+    public String writeNoseyStringTest() {
+        return this.writeNoseyString();
+    }
+    
+    private String writeNoseyString() {
+        //this.flux_capacitor = true;
+        //StringBuilder sb = new StringBuilder();
+        String outStr = "";
         try {
-            //JSONParser parser = new JSONParser();
-            URL resource = getClass().getClassLoader().getResource("quotes.json");
-            if (resource == null) {   
-                throw new IllegalArgumentException("file not found!");
-            } else {
-                
-                Object obj = parser.parse(new FileReader(new File(resource.getFile())));
-                JSONObject jsonObject = (JSONObject)obj;
-         
-                // failed if files have whitespaces or special characters
-                // File qFile = new File(resource.getFile());
-                // return new File(resource.toURI());
-                
-                JSONArray arr = jsonObject.getJSONArray("quotes");
-                int arrSize = arr.length();
-
-                Random random = new Random();
-                int maxRandom = 20000;
-                int minRandom = 0;
-        
-                int randomNum = random.nextInt(maxRandom - minRandom) + minRandom;
-                int index = (randomNum % arrSize);
-                sb.append("<!--\n\n");
-                String oStr = arr.getString(index);
-                sb.append("    ");
-                sb.append(oStr);
-                sb.append("\n\n    -->\n");
-                String qStr = sb.toString();
-                
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ASD.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException | ParseException ex) {
+            File f = getFileFromResource("quotes.json");
+            String content = FileUtils.readFileToString(f, "UTF-8");
+            
+            JSONObject jObj = new JSONObject(content);
+            JSONArray arr = jObj.getJSONArray("quotes");
+            
+            int arrSize = arr.length();
+            Random random = new Random();
+            int maxRandom = 20000;
+            int minRandom = 0;
+            
+            int randomNum = random.nextInt(maxRandom - minRandom) + minRandom;
+            int index = (randomNum % arrSize);
+            String oStr = arr.getString(index);
+            
+            outStr = oStr;
+            
+        } catch (URISyntaxException | IOException ex) {
             Logger.getLogger(ASD.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    */
+        
+        return outStr;
+    }   // End of writeNoseyString
+    
+    
+    /**
+     * 
+     * @param fileName
+     * @return
+     * @throws URISyntaxException 
+     */
+    private File getFileFromResource(String fileName) 
+            throws URISyntaxException {
+
+        File fObj = null;
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resource = classLoader.getResource(fileName);
+        if (resource == null) {
+            throw new IllegalArgumentException("file not found! " + fileName);
+        } else {
+            fObj = new File(resource.toURI());
+        }
+        
+        return fObj;
+    }   // End of getFileFromResource
 }   // End of class ASD
 
 
