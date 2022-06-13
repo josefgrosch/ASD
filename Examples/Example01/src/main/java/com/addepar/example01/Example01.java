@@ -2,8 +2,6 @@
 package com.addepar.example01;
 
 import com.addepar.asd.ASD;
-import com.addepar.asd.ASDMissingValuesException;
-//import com.addepar.asd.ASDMissingValuesException;
 import com.addepar.asd.ServiceMessage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +28,7 @@ public class Example01 {
         String serviceName = "pickles";
         String connectionString = "http://pickles.picklesunlimited.com";
     
+        //com.addepar.asd.ServiceMessage sm1 = new com.addepar.asd.ServiceMessage();
         ServiceMessage sm1 = new ServiceMessage();
         sm1.setAccountId(accountId);
         sm1.setClientName(clientName);
@@ -56,7 +55,7 @@ public class Example01 {
             String outJson2 = asd2.toJson();
             System.out.println("\nFully populated ASD");
             System.out.println(outJson2);
-        } catch (ASDMissingValuesException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Example01.class.getName()).log(Level.SEVERE, null, ex);
         }
         
