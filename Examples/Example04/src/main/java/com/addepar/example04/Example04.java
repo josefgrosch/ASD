@@ -2,7 +2,6 @@
 package com.addepar.example04;
 
 import com.addepar.asd.ASD;
-import com.addepar.asd.ASDKeyNotFoundException;
 import com.addepar.asd.ASDReply;
 import com.addepar.asd.ServiceMessage;
 import com.addepar.asd.Utility;
@@ -18,8 +17,9 @@ public class Example04 {
 
     public static void main(String[] args) {
         StringBuilder sb = new StringBuilder();
+        Utility u = new Utility();
         
-        ServiceMessage sm = Utility.initTestMessage();
+        ServiceMessage sm = u.initTestMessage();
         
         String paraName = sm.getParameterKey();
         paraName = paraName.replace("/service-status.json", "");
@@ -29,7 +29,7 @@ public class Example04 {
         
         try {
             asdr = asd.getParameterValue(sm);
-        } catch (ASDKeyNotFoundException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Example04.class.getName()).log(Level.SEVERE, null, ex);
         }
         

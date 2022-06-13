@@ -29,9 +29,11 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <!--
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
+                                -->
                     <compilerArgs>
                         <arg>-Xlint:unchecked</arg>
                     </compilerArgs>

@@ -70,7 +70,7 @@ public class Utility {
      * 
      * @return 
      */
-    public static ServiceMessage initTestMessage() {
+    public ServiceMessage initTestMessage() {
         String accountId = "123456789012";
         String clientName = "PicklesUnlimited";
         String clientId   = "666";
