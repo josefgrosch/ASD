@@ -54,7 +54,6 @@ package com.addepar.asd;
 **                                Imports
 **
 **************************************************************************/
-import com.addepar.asd.ASDMissingValuesException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -167,9 +166,9 @@ public class ASD {
     /**
      * 
      * @param sm 
-     * @throws com.addepar.asd.ASDMissingValuesException 
+     * @throws java.lang.Exception 
      */
-    public ASD(ServiceMessage sm) throws ASDMissingValuesException {
+    public ASD(ServiceMessage sm) throws Exception {
         this();
         
         this.sm = sm;
@@ -225,7 +224,7 @@ public class ASD {
 
         // If there are empty fields, that is a problem.
         if (this.fullyLoaded == false) {
-            throw new ASDMissingValuesException("Field "+this.emptyField+ "is empty. Try again");
+            throw new Exception("Field "+this.emptyField+ "is empty. Try again");
         }
     
         if (this.fluxCapacitor.length() > 0) {
