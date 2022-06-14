@@ -1,5 +1,61 @@
+/**************************************************************************
+**
+**                  < ASDMissingValuesException.java >
+**
+**************************************************************************/
 
+
+/**************************************************************************
+**
+**  File Name    : ASDMissingValuesException.java
+**
+**  Author       : Addepar Infrastructure Platform Tools Team 
+**                          
+**  Date         : 13 Jun 2022
+**
+**  Version      : 1.0
+**
+**  Modification : Some
+**
+**  Application  :
+**
+**  Functions    :
+**
+**  Description  :
+**
+**  Notes        :
+**
+**
+**************************************************************************/
+
+
+/**************************************************************************
+**
+**                               Copyright
+**
+**                   (C) Copyright 2022 Addepar, Inc.
+**                         <iptools@addepar.com>
+**
+**                          All Rights Reserved
+**
+**************************************************************************/
+
+
+/**************************************************************************
+**
+**                                Package
+**
+**************************************************************************/
 package com.addepar.asd;
+
+
+
+/**************************************************************************
+**
+**                                Imports
+**
+**************************************************************************/
+
 
 /**
  *
@@ -12,6 +68,7 @@ public class ASDMissingValuesException extends Exception {
      * message.
      */
     public ASDMissingValuesException() {
+        super();
     }
 
     /**
@@ -21,6 +78,14 @@ public class ASDMissingValuesException extends Exception {
      * @param msg the detail message.
      */
     public ASDMissingValuesException(String msg) {
-        super();
+        super(msg);
     }
-}
+
+}   // End of class ASDMissingValuesException.java
+
+
+/**************************************************************************
+**
+**               < End of ASDMissingValuesException.java >
+**
+**************************************************************************/
