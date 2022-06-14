@@ -1,18 +1,17 @@
-
 /**************************************************************************
 **
-**                   < ASDKeyNotFoundException.java >
+**                             < base.java >
 **
 **************************************************************************/
 
 
 /**************************************************************************
 **
-**  File Name    : ASDKeyNotFoundException.java
+**  File Name    : base.java
 **
 **  Author       : Addepar Infrastructure Platform Tools Team 
 **                          
-**  Date         : 13 Jun 2022
+**  Date         : 31 May 2022
 **
 **  Version      : 1.0
 **
@@ -50,42 +49,25 @@
 package com.addepar.asd;
 
 
+
 /**************************************************************************
 **
 **                                Imports
 **
 **************************************************************************/
 
-
 /**
  *
- * @author Josef Grosch -- josef.grosch@addepar.com 
+ * @author Josef Grosch -- josef.grosch@addepar.com
  */
-public class ASDKeyNotFoundException extends Exception {
+public class base {
+    
+}
 
-    /**
-     * Creates a new instance of <code>ASDKeyNotFoundException</code> without
-     * detail message.
-     */
-    public ASDKeyNotFoundException() {
-        super();
-    }   // End of ASDKeyNotFoundException
-
-    /**
-     * Constructs an instance of <code>ASDKeyNotFoundException</code> with the
-     * specified detail message.
-     *
-     * @param msg the detail message.
-     */
-    public ASDKeyNotFoundException(String msg) {
-        super(msg);
-    }   // End of ASDKeyNotFoundException
-
-}   // End of class ASDKeyNotFoundException
 
 
 /**************************************************************************
 **
-**                < End of ASDKeyNotFoundException.java >
+**                         < End of base.java >
 **
 **************************************************************************/

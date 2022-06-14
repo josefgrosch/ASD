@@ -284,8 +284,15 @@ public class ASD {
     public String getDefaultRegion() {
         return this.defaultRegion;
     }
+
+    /**
+     * 
+     * @return 
+     */
+    public String getServiceName() {
+        return this.serviceName;
+    }
     
-        
     //
     // Set methods
     //
@@ -330,6 +337,14 @@ public class ASD {
         this.defaultRegion = defaultRegion;
     }
 
+    /**
+     * 
+     * @param serviceName 
+     */
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+    
     //
     // General Methods
     //
