@@ -48,16 +48,15 @@
 **************************************************************************/
 package com.addepar.asd;
 
-import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
-
 
 /**************************************************************************
 **
 **                                Imports
 **
 **************************************************************************/
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 
 /**

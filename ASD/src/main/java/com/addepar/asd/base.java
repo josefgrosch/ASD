@@ -15,7 +15,7 @@
 **
 **  Version      : 1.0
 **
-**  Modification : Some
+**  Modification : 
 **
 **  Application  :
 **
@@ -23,7 +23,7 @@
 **
 **  Description  :
 **
-**  Notes        :
+**  Notes        : This is a template for class files
 **
 **
 **************************************************************************/
@@ -63,7 +63,6 @@ package com.addepar.asd;
 public class base {
     
 }
-
 
 
 /**************************************************************************
