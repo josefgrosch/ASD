@@ -175,6 +175,30 @@ public class Common {
     
     /**
      * 
+     * @param accountId
+     * @param clientName
+     * @param arcadeName
+     * @param serviceName
+     * @return 
+     */
+    public static String genParameterKey(String accountId,
+                                         String clientName,
+                                         String arcadeName,
+                                         String serviceName) {
+        
+        StringBuilder sb = new StringBuilder();
+                
+        sb.append("/ASD/");
+        sb.append(accountId).append("/");
+        sb.append(clientName).append("/");
+        sb.append(arcadeName).append("/");
+        sb.append(serviceName).append("/service-status.json");
+        
+        return sb.toString();  
+    }
+    
+    /**
+     * 
      * @param ssmClient
      * @return 
      */
