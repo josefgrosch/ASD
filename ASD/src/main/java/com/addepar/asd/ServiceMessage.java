@@ -13,7 +13,7 @@
 **                          
 **  Date         : 31 May 2022
 **
-**  Version      : 1.0
+**  Version      : 0.0.1
 **
 **  Modification : Some
 **
@@ -58,11 +58,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import com.addepar.asd.Common;
 
-// ASD/023960176222/joes_pretty_good_ISP/dead_sky.arc/iverson.json
-// ASD/\<AWS account ID\>/\<client\>/\<arcade\>/\<service\>.json
 
 /**
  * 
+ * Key Scheme<br>
+ * 
+ * /ASD/[AWS account ID]/[client]/[arcade]/[service]/service_status.json<p>
+ * 
+ * Key Example<br>
+ * 
+ * /ASD/123456789/pickles_unlimited/big_pink.arc.arc/iverson/service_status.json<p>
  * 
  * 
  * @author Josef Grosch -- josef.grosch@addepar.com 
@@ -109,6 +114,11 @@ public class ServiceMessage {
      * 
      */
     private boolean serviceStatus = false;
+    
+    /**
+     * 
+     */
+    private boolean serviceRegistered = false;
     
     /**
      * 
