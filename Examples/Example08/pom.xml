@@ -12,9 +12,9 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.addepar</groupId>
+            <groupId>com.addepar.asd</groupId>
             <artifactId>ASD</artifactId>
-            <version>1.0</version>
+            <version>0.0.1</version>
             <type>jar</type>
         </dependency>
     </dependencies>

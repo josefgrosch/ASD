@@ -54,6 +54,11 @@ package com.addepar.asd;
 **                                Imports
 **
 **************************************************************************/
+import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.auth.InstanceProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.simplesystemsmanagement.AWSSimpleSystemsManagement;
+import com.amazonaws.services.simplesystemsmanagement.AWSSimpleSystemsManagementClientBuilder;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -71,6 +76,7 @@ import software.amazon.awssdk.awscore.exception.AwsServiceException;
 import software.amazon.awssdk.core.exception.SdkClientException;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ssm.SsmClient;
+import software.amazon.awssdk.services.ssm.model.DeleteParameterRequest;
 import software.amazon.awssdk.services.ssm.model.GetParameterRequest;
 import software.amazon.awssdk.services.ssm.model.GetParameterResponse;
 import software.amazon.awssdk.services.ssm.model.ParameterMetadata;
@@ -147,7 +153,8 @@ public class ASD {
         
         this.arcadeName = System.getenv("ARCADE_NAME");
         if (this.arcadeName == null || this.arcadeName.length() == 0) {
-            this.arcadeName = Common.DEFAULT_REGION;
+            //this.arcadeName = Common.DEFAULT_REGION;
+            this.arcadeName = "";
         }
         
         this.defaultRegion = System.getenv("DEFAULT_REGION");
@@ -411,14 +418,33 @@ public class ASD {
      * @return 
      */
     public ASDReply unregisterService(ServiceMessage sm) {
-        ASDReply asdr = new ASDReply();
+        ASDReply asdr = null;
         
-         if (this.fluxCapacitor.length() > 0) {
-            asdr.setMsg(this.fluxCapacitor);
+        try {
+            asdr = this.getParameterValue(sm);
+            String key = sm.getParameterKey();
+            int i = 0;
+            
+            //DeleteParameterRequest dpr = new DeleteParameterRequest.Builder.name(key).toBuilder();
+          
+            /*
+            AWSCredentialsProvider credentials = InstanceProfileCredentialsProvider.getInstance();
+            AWSSimpleSystemsManagement simpleSystemsManagementClient =
+            AWSSimpleSystemsManagementClientBuilder.standard().withCredentials(credentials)
+                .withRegion(Regions.getCurrentRegion().getName()).build();
+    
+            DeleteParameterRequest parameterRequest = new DeleteParameterRequest().withName(key);
+
+            simpleSystemsManagementClient.deleteParameter(parameterRequest);
+            */
+        } catch (ASDKeyNotFoundException ex) {
+            Logger.getLogger(ASD.class.getName()).log(Level.SEVERE, null, ex);
         }
         
          return asdr;
     }   // End of unregisterService
+    
+   
     
     /**
      * 
@@ -535,9 +561,11 @@ public class ASD {
         return outStr;
     }
     
+    /*
     public String writeNoseyStringTest() {
         return this.writeNoseyString();
     }
+    */
     
     private String writeNoseyString() {
         //this.flux_capacitor = true;

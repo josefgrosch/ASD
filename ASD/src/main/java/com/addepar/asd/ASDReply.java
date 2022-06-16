@@ -98,6 +98,15 @@ public class ASDReply {
     /**
      * 
      */
+    private String key = "";
+    
+    //
+    // Constructors
+    //
+    
+    /**
+     * 
+     */
     public ASDReply() {
         super();
     }   // End of default class constructor
@@ -164,6 +173,14 @@ public class ASDReply {
         return this.msg;
     }
     
+    /**
+     * 
+     * @return 
+     */
+    public String getKey() {
+        return this.key;
+    }
+    
     //
     // Set methods
     //
@@ -215,6 +232,14 @@ public class ASDReply {
     public void setMsg(String msg) {
         this.msg = msg;
         
+    }
+
+    /**
+     * 
+     * @param key 
+     */
+    public void setKet(String key) {
+        this.key = key;
     }
     
 }   // End of class

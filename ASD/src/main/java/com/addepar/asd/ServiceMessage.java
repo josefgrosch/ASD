@@ -56,6 +56,7 @@ package com.addepar.asd;
 **************************************************************************/
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.addepar.asd.Common;
 
 // ASD/023960176222/joes_pretty_good_ISP/dead_sky.arc/iverson.json
 // ASD/\<AWS account ID\>/\<client\>/\<arcade\>/\<service\>.json
@@ -109,6 +110,9 @@ public class ServiceMessage {
      */
     private boolean serviceStatus = false;
     
+    /**
+     * 
+     */
     private String msg = "";
     
     //
@@ -142,6 +146,10 @@ public class ServiceMessage {
         this.arcadeName  = arcadeName;
         this.serviceName = serviceName;
         
+        this.addParameterKey(this.accountId, 
+                             this.clientName, 
+                             this.arcadeName, 
+                             this.serviceName);
     }   // End of constructor - parameter
 
     /**
@@ -156,6 +164,10 @@ public class ServiceMessage {
         this.arcadeName  = sm.getArcadeName();
         this.serviceName = sm.getServiceName();
         
+        this.addParameterKey(this.accountId, 
+                             this.clientName, 
+                             this.arcadeName, 
+                             this.serviceName);
     }   // End of constructor - ServiceMessage
     
     /**
@@ -170,6 +182,11 @@ public class ServiceMessage {
             this.clientName  = jObj.getString("client_name");
             this.arcadeName  = jObj.getString("arcade_name");
             this.serviceName = jObj.getString("service_name");
+            
+            this.addParameterKey(this.accountId, 
+                                 this.clientName, 
+                                 this.arcadeName, 
+                                 this.serviceName);
         }
         catch(JSONException ex) {
             System.out.println(ex);
@@ -248,6 +265,10 @@ public class ServiceMessage {
         return this.serviceStatus;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public String getMsg() {
         return this.msg;
     }
@@ -312,6 +333,10 @@ public class ServiceMessage {
         this.serviceStatus = status;
     }
 
+    /**
+     * 
+     * @param msg 
+     */
     public void setMsg(String msg) {
         this.msg = msg;
     }
@@ -336,6 +361,23 @@ public class ServiceMessage {
         
         return Common.toJson(this);
     }
+    
+    /**
+     * 
+     * @param accountId
+     * @param clientName
+     * @param arcadeName
+     * @param serviceName 
+     */
+    private void addParameterKey(String accountId,
+                                 String clientName,
+                                 String arcadeName,
+                                 String serviceName) {
+        this.parameterKey = Common.genParameterKey(accountId,
+                                                   clientName,
+                                                   arcadeName,
+                                                   serviceName);
+    }   // End of addParameterKey
 }   // End of class ServiceMessage
 
 
