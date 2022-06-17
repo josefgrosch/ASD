@@ -56,6 +56,7 @@ package com.addepar.asd;
 **************************************************************************/
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.json.JSONObject;
 import software.amazon.awssdk.services.ssm.SsmClient;
@@ -121,6 +122,18 @@ public class Common {
      */
     public final static int FOUND     = 6; // Found my keys
 
+    /**
+     * 
+     */
+    public final static ArrayList <String> AWS_REGIONS = 
+        new ArrayList<>(Arrays.asList("ap-northeast-1", "ap-northeast-3",
+                                            "ap-south-1",     "ap-southeast-1",
+                                            "ap-southeast-2", "ca-central-1",
+                                            "eu-central-1",   "eu-north-1",
+                                            "eu-west-1",      "eu-west-2",
+                                            "eu-west-3",      "sa-east-1",
+                                            "us-east-1",      "us-east-2",
+                                            "us-west-1",      "us-west-2"));
     /**
      * 
      * The method <b>toJson</b> takes a fully populated 
