@@ -9,9 +9,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <!--
-        <exec.mainClass>com.addepar.asd.ASD</exec.mainClass>
--->
         <java.version>1.10</java.version>
     </properties>
     <build>

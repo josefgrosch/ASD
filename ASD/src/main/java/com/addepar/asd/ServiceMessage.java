@@ -70,38 +70,50 @@ import com.addepar.asd.Common;
  * /ASD/123456789/pickles_unlimited/big_pink.arc.arc/iverson/service_status.json<p>
  * 
  * 
- * @author Josef Grosch -- josef.grosch@addepar.com 
+ * @author Josef Grosch (josef.grosch@addepar.com)
  */
 public class ServiceMessage {
    
 
     /**
      * 
+     * The field <b>accountId</b> is used to contain the AWS account ID. This
+     * field is mandatory.
      */
     private String accountId = "";
     
     /**
      * 
+     * The field <b>clientName</b> is the short client name. The name should
+     * be lowercase ASCII with only - or _ between words. This field is 
+     * mandatory.
      */
     private String clientName = "";
     
     /**
      * 
+     * The field <b>clientId</b> is Addepars internal client Id. This field is
+     * optional and not really used.
      */
     private String clientId   = "";
     
     /**
      * 
+     * The field <b>arcadeName</b> is the Arcade Name. This field is mandatory.
      */
     private String arcadeName = "";
     
     /**
      * 
+     * The field <b>serviceName</b> is the name of the service. This field 
+     * is mandatory.
      */
     private String serviceName = "";
     
     /**
      * 
+     * The field <b>connectionString</b> is the URL that is used to connect to
+     * the service running on a container. This field is mandatory.
      */
     private String connectionString = "";
     
@@ -113,7 +125,7 @@ public class ServiceMessage {
     /**
      * 
      */
-    private boolean serviceStatus = false;
+    private String serviceStatus = "";
     
     /**
      * 
@@ -142,19 +154,22 @@ public class ServiceMessage {
      * @param clientName
      * @param arcadeName
      * @param serviceName
+     * @param serviceStatus
      */
     public ServiceMessage(
             String accountId,
             String clientName,
             String arcadeName,
-            String serviceName) {
+            String serviceName,
+            String serviceStatus) {
         
         this();
         
-        this.accountId   = accountId;
-        this.clientName  = clientName;
-        this.arcadeName  = arcadeName;
-        this.serviceName = serviceName;
+        this.accountId     = accountId;
+        this.clientName    = clientName;
+        this.arcadeName    = arcadeName;
+        this.serviceName   = serviceName;
+        this.serviceStatus = serviceStatus;
         
         this.addParameterKey(this.accountId, 
                              this.clientName, 
@@ -169,10 +184,11 @@ public class ServiceMessage {
     public ServiceMessage(ServiceMessage sm) {
         this();
         
-        this.accountId   = sm.getAccountId();
-        this.clientName  = sm.getClientName();
-        this.arcadeName  = sm.getArcadeName();
-        this.serviceName = sm.getServiceName();
+        this.accountId     = sm.getAccountId();
+        this.clientName    = sm.getClientName();
+        this.arcadeName    = sm.getArcadeName();
+        this.serviceName   = sm.getServiceName();
+        this.serviceStatus = sm.getServiceStatus();
         
         this.addParameterKey(this.accountId, 
                              this.clientName, 
@@ -188,10 +204,11 @@ public class ServiceMessage {
         this();
         
         try {
-            this.accountId   = jObj.getString("account_id");
-            this.clientName  = jObj.getString("client_name");
-            this.arcadeName  = jObj.getString("arcade_name");
-            this.serviceName = jObj.getString("service_name");
+            this.accountId     = jObj.getString("account_id");
+            this.clientName    = jObj.getString("client_name");
+            this.arcadeName    = jObj.getString("arcade_name");
+            this.serviceName   = jObj.getString("service_name");
+            this.serviceStatus = jObj.getString("service_status");
             
             this.addParameterKey(this.accountId, 
                                  this.clientName, 
@@ -271,7 +288,7 @@ public class ServiceMessage {
      * 
      * @return 
      */
-    public boolean getServiceStatus() {
+    public String getServiceStatus() {
         return this.serviceStatus;
     }
 
@@ -339,7 +356,7 @@ public class ServiceMessage {
      * 
      * @param status 
      */
-    public void setServiceStatus(boolean status) {
+    public void setServiceStatus(String status) {
         this.serviceStatus = status;
     }
 
@@ -368,9 +385,8 @@ public class ServiceMessage {
      * @return 
      */
     public String toJson() {
-        
         return Common.toJson(this);
-    }
+    }   // End of toJson
     
     /**
      * 

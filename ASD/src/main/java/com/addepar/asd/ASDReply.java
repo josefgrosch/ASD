@@ -13,7 +13,7 @@
 **                          
 **  Date         : 31 May 2022
 **
-**  Version      : 1.0
+**  Version      : 0.0.1
 **
 **  Modification : Some
 **
@@ -61,7 +61,7 @@ import software.amazon.awssdk.http.*;
 
 /**
  *
- * @author Josef Grosch -- josef.grosch@addepar.com 
+ * @author Josef Grosch (josef.grosch@addepar.com)
  */
 public class ASDReply {
     

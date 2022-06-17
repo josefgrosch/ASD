@@ -61,13 +61,17 @@ import java.net.URL;
 
 /**
  *
- * @author Josef Grosch -- josef.grosch@addepar.com 
+ * @author Josef Grosch (josef.grosch@addepar.com)
  */
 public class Utility {
     
     /**
      * 
-     * @return 
+     * The method <b>initTestMessage</b> creates and populates a 
+     * {@link com.addepar.asd.ServiceMessage ServiceMessage} with know dummy 
+     * data for the purpose of testing.
+     * 
+     * @return A ServiceMessage fully populated with dummy test data. 
      */
     public static ServiceMessage initTestMessage() {
         String accountId = "123456789012";
@@ -75,20 +79,23 @@ public class Utility {
         String clientId   = "666";
         String arcadeName = "Big_Pink.arc";
         String serviceName = "memcache";
+        String serviceStatus = "dead";
         String connectionString = "http://pickles.picklesunlimited.com";
     
-        ServiceMessage sm1 = new ServiceMessage();
-        sm1.setAccountId(accountId);
-        sm1.setClientName(clientName);
-        sm1.setClientId(clientId);
-        sm1.setArcadeName(arcadeName);
-        sm1.setServiceName(serviceName);
-        sm1.setConnectionString(connectionString);
+        ServiceMessage sm = new ServiceMessage();
+        sm.setAccountId(accountId);
+        sm.setClientName(clientName);
+        sm.setClientId(clientId);
+        sm.setArcadeName(arcadeName);
+        sm.setServiceName(serviceName);
+        sm.setServiceStatus(serviceStatus);
         
-        String pKey = Common.genParameterKey(sm1);
-        sm1.setParameterKey(pKey);
+        sm.setConnectionString(connectionString);
         
-        return sm1;
+        String pKey = Common.genParameterKey(sm);
+        sm.setParameterKey(pKey);
+        
+        return sm;
     }   // End of initTestMessage
      
     /**
