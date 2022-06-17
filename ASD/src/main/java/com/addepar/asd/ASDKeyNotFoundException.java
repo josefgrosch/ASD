@@ -14,7 +14,7 @@
 **                          
 **  Date         : 13 Jun 2022
 **
-**  Version      : 1.0
+**  Version      : 0.0.1
 **
 **  Modification : Some
 **
@@ -59,7 +59,7 @@ package com.addepar.asd;
 
 /**
  *
- * @author Josef Grosch -- josef.grosch@addepar.com 
+ * @author Josef Grosch (josef.grosch@addepar.com)
  */
 public class ASDKeyNotFoundException extends Exception {
 

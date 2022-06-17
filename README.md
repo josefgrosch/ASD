@@ -23,25 +23,28 @@ is the path to the config file for pear. Both are related because they are the "
  * Arcade Name -- The arcade name
  * Service Name -- the service name
 
+
 For the purposes of this document  we are using the following data;
 
 * Account ID -- 123456789012
  * Client Name -- big_client
  * Arcade Name -- big_pink.arc
  * Service Name -- iverson
+ 
 
 This yields a key thus
 
-```/ASD/123456789012/big_client/big_pink.arc/iverson```
+```/ASD/123456789012/big_client/big_pink.arc/iverson/service_status.json```
 
-The value that APS returns is, by default, a string. This could be anything. ASD encodes this as a json string like so
+The value that APS returns is, by default, a string. This could be anything but ASD encodes this as a json string like so
 
 ```
 {
-"account_id": "123456789012",
+"account_id": "123456789",
 "client_name": "big_client",
 "arcade_name": "big_pink.arc",
 "service_name": "iverson",
+"service_status": "live",
 "connection_string":"http://bin-pink.arc/iversion:8080"
 }
 ```
@@ -56,7 +59,7 @@ The first step to register, un-register, or locate a Parameter Value (key/value 
  * ServiceMessage sm = new ServiceMessage();
  * ServiceMessage sm = new ServiceMessage(ServiceMessage);
  * ServiceMessage sm = new ServiceMessage(JSONObject);
- * ServiceMessage sm = new ServiceMessage(acc_id, client_name, arcade_name, service_name);
+ * ServiceMessage sm = new ServiceMessage(acc_id, client_name, arcade_name, service_name, service_state);
 
 
 ---

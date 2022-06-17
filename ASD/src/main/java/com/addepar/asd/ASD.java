@@ -13,7 +13,7 @@
 **                          
 **  Date         : 31 May 2022
 **
-**  Version      : 1.0
+**  Version      : 0.0.1
 **
 **  Modification : Some
 **
@@ -81,8 +81,8 @@ import software.amazon.awssdk.services.ssm.model.SsmResponseMetadata;
 
 /**
  *
- * @author Josef Grosch -- josef.grosch@addepar.com
- * @version 0.1
+ * @author Josef Grosch (josef.grosch@addepar.com)
+ * @version 0.0.1
  */
 public class ASD {
     /**
@@ -131,7 +131,9 @@ public class ASD {
      */
     private ServiceMessage sm = null;
     
-    
+    /**
+     * 
+     */
     private String fluxCapacitor = "";
     
   
@@ -145,9 +147,13 @@ public class ASD {
     public ASD() {
         super();
         
+        /*
+         * Check to see if the arcade name is defined in the envionment. If so
+         * then set the field, arcadeName. By design environment variables 
+         * are overridded by command line parameters and/or value set.
+         */
         this.arcadeName = System.getenv("ARCADE_NAME");
         if (this.arcadeName == null || this.arcadeName.length() == 0) {
-            //this.arcadeName = Common.DEFAULT_REGION;
             this.arcadeName = "";
         }
         
@@ -417,8 +423,7 @@ public class ASD {
         try {
             asdr = this.getParameterValue(sm);
             String key = sm.getParameterKey();
-            int i = 0;
-            
+                                                                   
             //DeleteParameterRequest dpr = new DeleteParameterRequest.Builder.name(key).toBuilder();
           
             /*
