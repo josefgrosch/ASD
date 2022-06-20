@@ -49,16 +49,15 @@
 **************************************************************************/
 package com.addepar.asd;
 
-import java.util.HashMap;
-import org.json.JSONObject;
-
-
 
 /**************************************************************************
 **
 **                                Imports
 **
 **************************************************************************/
+import java.util.HashMap;
+import org.json.JSONObject;
+
 
 /**
  *
@@ -98,7 +97,9 @@ public class ASDFilter {
      * 
      */
     private HashMap <String, String> filterElements = null;
-    
+
+    private int filterCount = 0;
+
     /**
      * 
      */
@@ -212,6 +213,10 @@ public class ASDFilter {
     public HashMap getFilterElements() {
         return this.filterElements;
     }
+
+    public int getFilterCount() {
+        return this.filterCount;
+    }
     
     //
     // Set methods
@@ -261,21 +266,25 @@ public class ASDFilter {
         // Acount ID
         if (this.accountId.length() > 0) {
             filterElements.put("account_id", this.accountId);
+            this.filterCount++;
         }
         
         // ArcadeName
         if (this.arcadeName.length() > 0) {
             filterElements.put("arcade_name", this.arcadeName);
+            this.filterCount++;
         }
         
         // Client Name
         if (this.clientName.length() > 0) {
             filterElements.put("client_name", this.clientName);
+            this.filterCount++;
         }
         
         // Service Name
         if (this.serviceName.length() > 0) {
             filterElements.put("service_Name", this.serviceName);
+            this.filterCount++;
         }
         
     }   // End of genSearchFilter
