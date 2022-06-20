@@ -100,6 +100,11 @@ public class ASDReply {
      */
     private String key = "";
     
+    /**
+     * 
+     */
+    private int queryStatus = Common.OK;
+    
     //
     // Constructors
     //
@@ -181,6 +186,14 @@ public class ASDReply {
         return this.key;
     }
     
+    /**
+     * 
+     * @return 
+     */
+    public int getQueryStatus() {
+        return this.queryStatus;
+    }
+    
     //
     // Set methods
     //
@@ -238,10 +251,17 @@ public class ASDReply {
      * 
      * @param key 
      */
-    public void setKet(String key) {
+    public void setKey(String key) {
         this.key = key;
     }
     
+    /**
+     * 
+     * @param queryStatus 
+     */
+    public void setQueryStatus(int queryStatus) {
+        this.queryStatus = queryStatus;
+    }
 }   // End of class
 
 

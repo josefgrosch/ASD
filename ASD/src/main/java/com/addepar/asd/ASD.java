@@ -60,6 +60,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,11 +72,15 @@ import software.amazon.awssdk.awscore.exception.AwsServiceException;
 import software.amazon.awssdk.core.exception.SdkClientException;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ssm.SsmClient;
+import software.amazon.awssdk.services.ssm.model.DescribeParametersRequest;
+import software.amazon.awssdk.services.ssm.model.DescribeParametersResponse;
 import software.amazon.awssdk.services.ssm.model.GetParameterRequest;
 import software.amazon.awssdk.services.ssm.model.GetParameterResponse;
 import software.amazon.awssdk.services.ssm.model.ParameterMetadata;
+import software.amazon.awssdk.services.ssm.model.ParameterNotFoundException;
 import software.amazon.awssdk.services.ssm.model.PutParameterRequest;
 import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
+import software.amazon.awssdk.services.ssm.model.SsmException;
 import software.amazon.awssdk.services.ssm.model.SsmResponseMetadata;
 
 
@@ -451,7 +456,7 @@ public class ASD {
      * @return
      * @throws ASDKeyNotFoundException 
      */
-    public ASDReply getParameterValue(ServiceMessage sm) throws ASDKeyNotFoundException  {
+    public ASDReply getParameterValue(ServiceMessage sm) throws ASDKeyNotFoundException {
         ASDReply asdr = new ASDReply();
         String paraName = sm.getParameterKey();
         GetParameterResponse parameterResponse = null;
@@ -484,10 +489,12 @@ public class ASD {
         String statusCode = String.valueOf(parameterResponse
                 .sdkHttpResponse().statusCode());
         asdr.setStatusCode(statusCode);
+        asdr.setQueryStatus(Common.OK);
 
         ssmClient.close();
-        } catch (AwsServiceException | SdkClientException ex) {
-            System.out.println(ex.getMessage());
+        } catch (ParameterNotFoundException ex) {
+            asdr.setQueryStatus(Common.NOT_FOUND);
+            asdr.setMsg("Parameter not found");
         }
         
         if (this.fluxCapacitor.length() > 0) {
@@ -499,11 +506,17 @@ public class ASD {
    
     /**
      * 
-     * @param sm
      * @return 
      */
-    public ASDReply locateServices(ServiceMessage sm) {
-        ASDReply asdr = new ASDReply();
+    public ArrayList locateServices() {
+        return listAllParameterKeys();
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public ArrayList listAllParameterKeys() {
         Region region = Region.US_EAST_2;
         
         SsmClient ssmClient = SsmClient.builder()
@@ -511,20 +524,86 @@ public class ASD {
                 .credentialsProvider(ProfileCredentialsProvider.create())
                 .build();
 
-        ArrayList al = Common.getAllParameters(ssmClient);
-        Iterator alIterator = al.iterator();
-        while (alIterator.hasNext()) {
-            ParameterMetadata  pm = (ParameterMetadata) alIterator.next();
-        }
-        
+        ArrayList al = getAllParameters(ssmClient);
         ssmClient.close();
         
-        if (this.fluxCapacitor.length() > 0) {
-            asdr.setMsg(this.fluxCapacitor);
+        return al;
+    }   // End of locateService
+
+    /**
+     * 
+     * @param asdf
+     * @return 
+     */
+    public ArrayList listAllParameterKeysFiltered(ASDFilter asdf) {
+        ArrayList al = new ArrayList();
+        
+        return al;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public static ArrayList getAllParameters() {
+        Region region = Region.US_EAST_2;
+        SsmClient ssmClient = SsmClient.builder()
+                .region(region)
+                .credentialsProvider(ProfileCredentialsProvider.create())
+                .build();
+
+        return getAllParameters(ssmClient);
+    }
+
+    /**
+     * 
+     * @param ssmClient
+     * @return 
+     */
+    public static ArrayList getAllParameters(SsmClient ssmClient) {
+        ArrayList al = new ArrayList();
+        boolean thereIsMore = false;
+        
+        try {
+            DescribeParametersRequest desRequest = DescribeParametersRequest.builder()
+                    .maxResults(10)
+                    .build();
+            
+            DescribeParametersResponse desResponse = ssmClient.describeParameters(desRequest);
+            String nextToken = desResponse.nextToken();
+            if (nextToken != null) {
+                thereIsMore = true;
+            }
+            
+            List<ParameterMetadata> params = desResponse.parameters();
+            for (ParameterMetadata paraMeta : params) {
+                al.add(paraMeta);
+            } 
+            
+            while (thereIsMore) {
+                DescribeParametersRequest desRequest2 = DescribeParametersRequest.builder()
+                    .maxResults(10)
+                    .nextToken(nextToken)
+                    .build();
+                DescribeParametersResponse desResponse2 = ssmClient.describeParameters(desRequest2);
+                nextToken = desResponse2.nextToken();
+                if (nextToken != null) {
+                    thereIsMore = true;
+                } else {
+                    thereIsMore = false;
+                }
+                
+                List<ParameterMetadata> params2 = desResponse2.parameters();
+                for (ParameterMetadata paraMeta2 : params2) {
+                    al.add(paraMeta2);
+                }
+            }   // End of while loop
+        } catch (SsmException e) {
+            e.getStackTrace();
         }
         
-        return asdr;
-    }   // End of locateService
+        return al;
+    }   // End of getAllParameters
     
     /**
      * 
