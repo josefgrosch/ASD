@@ -59,6 +59,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.json.JSONObject;
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ssm.SsmClient;
 import software.amazon.awssdk.services.ssm.model.DescribeParametersRequest;
 import software.amazon.awssdk.services.ssm.model.DescribeParametersResponse;
@@ -235,55 +237,6 @@ public class Common {
         return sb.toString();  
     }
     
-    /**
-     * 
-     * @param ssmClient
-     * @return 
-     */
-    public static ArrayList getAllParameters(SsmClient ssmClient) {
-        ArrayList al = new ArrayList();
-        boolean thereIsMore = false;
-        
-        try {
-            DescribeParametersRequest desRequest = DescribeParametersRequest.builder()
-                    .maxResults(10)
-                    .build();
-            
-            DescribeParametersResponse desResponse = ssmClient.describeParameters(desRequest);
-            String nextToken = desResponse.nextToken();
-            if (nextToken != null) {
-                thereIsMore = true;
-            }
-            
-            List<ParameterMetadata> params = desResponse.parameters();
-            for (ParameterMetadata paraMeta : params) {
-                al.add(paraMeta);
-            } 
-            
-            while (thereIsMore) {
-                DescribeParametersRequest desRequest2 = DescribeParametersRequest.builder()
-                    .maxResults(10)
-                    .nextToken(nextToken)
-                    .build();
-                DescribeParametersResponse desResponse2 = ssmClient.describeParameters(desRequest2);
-                nextToken = desResponse2.nextToken();
-                if (nextToken != null) {
-                    thereIsMore = true;
-                } else {
-                    thereIsMore = false;
-                }
-                
-                List<ParameterMetadata> params2 = desResponse2.parameters();
-                for (ParameterMetadata paraMeta2 : params2) {
-                    al.add(paraMeta2);
-                }
-            }   // End of while loop
-        } catch (SsmException e) {
-            e.getStackTrace();
-        }
-        
-        return al;
-    }   // End of getAllParameters
 }   // End of class Common
 
 

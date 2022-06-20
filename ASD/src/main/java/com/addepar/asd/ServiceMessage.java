@@ -130,6 +130,11 @@ public class ServiceMessage {
     /**
      * 
      */
+    private int queryStatus = Common.OK;
+    
+    /**
+     * 
+     */
     private boolean serviceRegistered = false;
     
     /**
@@ -300,6 +305,14 @@ public class ServiceMessage {
         return this.msg;
     }
     
+    /**
+     * 
+     * @return 
+     */
+    public int getQueryStatus() {
+        return this.queryStatus;
+    }
+    
     //
     // Set methods
     //
@@ -376,6 +389,14 @@ public class ServiceMessage {
         this.parameterKey = parameterKey;
     }
     
+    /**
+     * 
+     * @param queryStatus 
+     */
+    public void setQueryStatus(int queryStatus) {
+        this.queryStatus = queryStatus;
+    }
+    
     //
     // 
     //
@@ -404,6 +425,10 @@ public class ServiceMessage {
                                                    arcadeName,
                                                    serviceName);
     }   // End of addParameterKey
+    
+    public void updateParameterKey() {
+        this.setParameterKey(Common.genParameterKey(this));
+    }
 }   // End of class ServiceMessage
 
 
