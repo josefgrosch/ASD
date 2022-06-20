@@ -59,8 +59,10 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -536,11 +538,61 @@ public class ASD {
      * @return 
      */
     public ArrayList listAllParameterKeysFiltered(ASDFilter asdf) {
-        ArrayList al = new ArrayList();
+        boolean recordMatch = false;
+        ArrayList filteredList = new ArrayList();
         
-        return al;
-    }
+        ArrayList al = listAllParameterKeys();
+        
+        Iterator it = al.iterator();
+        while (it.hasNext()) {
+            ParameterMetadata pm = (ParameterMetadata) it.next();
+            String name = pm.name();
+            
+            recordMatch = doesRecordMatch(asdf, name);
+            if (recordMatch) {
+                filteredList.add(pm);
+            }
+        }   // End of while loop
+        
+        return filteredList;
+    }   // End of listAllParameterKeys
 
+    /**
+     * 
+     * @param asdf
+     * @param name
+     * @return 
+     */
+    public boolean doesRecordMatch(ASDFilter asdf, String name) {
+        boolean match = false;
+        HashMap hm = asdf.getFilterElements();
+        int filterCount = asdf.getFilterCount();
+        int index = 0;
+        
+        if (filterCount == 0) {
+            match = true;
+        } else {
+            Iterator hmIterator = hm.entrySet().iterator();
+            while (hmIterator.hasNext()) {
+                Map.Entry mapElement = (Map.Entry)hmIterator.next();
+                
+                String value = (String)mapElement.getValue(); 
+                String key = (String) mapElement.getKey();
+            
+                if (name.contains(value)) {
+                    index++;
+                }
+                int i = 0;
+            }   // End of while
+            
+            if (index == filterCount) {
+                match = true;
+            }
+        }   // End of else
+        
+        return match;
+    }   // End of doesRecordMatch
+    
     /**
      * 
      * @return 
