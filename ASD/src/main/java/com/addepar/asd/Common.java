@@ -57,15 +57,7 @@ package com.addepar.asd;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import org.json.JSONObject;
-import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
-import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.ssm.SsmClient;
-import software.amazon.awssdk.services.ssm.model.DescribeParametersRequest;
-import software.amazon.awssdk.services.ssm.model.DescribeParametersResponse;
-import software.amazon.awssdk.services.ssm.model.ParameterMetadata;
-import software.amazon.awssdk.services.ssm.model.SsmException;
 
 
 /**
@@ -124,6 +116,36 @@ public class Common {
      */
     public final static int FOUND     = 6; // Found my keys
 
+   /**
+    * 
+    */
+    public final static int ASD_FIELD     = 1;
+
+    /**
+     * 
+     */
+    public final static int ACCOUNT_FIELD = 2;
+
+    /**
+     * 
+     */
+    public final static int CO_NAME_FIELD = 3;
+
+    /**
+     * 
+     */
+    public final static int ARCADE_FIELD  = 4;
+
+    /**
+     * 
+     */
+    public final static int SERVICE_FIELD = 5;
+    
+    /**
+     * 
+     */
+    public final static int FIELD_COUNT = 7;
+    
     /**
      * 
      */
