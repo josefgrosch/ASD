@@ -98,6 +98,9 @@ public class ASDFilter {
      */
     private HashMap <String, String> filterElements = null;
 
+    /**
+     * 
+     */
     private int filterCount = 0;
 
     /**
@@ -107,7 +110,7 @@ public class ASDFilter {
         super();
         
         this.filterElements = new HashMap<>();
-    }
+    }   // End of base constructor
     
     /**
      * 
@@ -146,8 +149,17 @@ public class ASDFilter {
     public ASDFilter(String parameterKey) {
         this();
         
-        buildElementMap();
-    }   // End of constructor
+        String [] bits = parameterKey.split("/");
+        int bitsCount = bits.length;
+        if (bitsCount == Common.FIELD_COUNT) {
+            this.accountId   = bits[Common.ACCOUNT_FIELD];
+            this.clientName  = bits[Common.CO_NAME_FIELD];
+            this.arcadeName  = bits[Common.ARCADE_FIELD];
+            this.serviceName = bits[Common.SERVICE_FIELD];
+            
+            buildElementMap();
+        }   // End of if
+    }   // End of constructor - String
     
     /**
      * 
