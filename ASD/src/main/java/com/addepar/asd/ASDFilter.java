@@ -61,6 +61,9 @@ import org.json.JSONObject;
 
 /**
  *
+ * This class is used to filter out the parameter records from those 
+ * contained in the ArrayList returned from the parameter store query. 
+ * 
  * @author Josef Grosch -- josef.grosch@addepar.com
  */
 public class ASDFilter {
@@ -158,7 +161,7 @@ public class ASDFilter {
             this.serviceName = bits[Common.SERVICE_FIELD];
             
             buildElementMap();
-        }   // End of if
+        }   // End of if block
     }   // End of constructor - String
     
     /**
@@ -298,7 +301,6 @@ public class ASDFilter {
             filterElements.put("service_Name", this.serviceName);
             this.filterCount++;
         }
-        
     }   // End of genSearchFilter
 }   // End of Class ASDFilter
 
