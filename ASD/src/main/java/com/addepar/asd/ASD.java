@@ -554,6 +554,12 @@ public class ASD {
             }
         }   // End of while loop
         
+        Iterator it2 = filteredList.iterator();
+        while (it2.hasNext()) {
+            ParameterMetadata pm2 = (ParameterMetadata) it2.next();
+            String name2 = pm2.name();  
+        }
+        
         return filteredList;
     }   // End of listAllParameterKeys
 
@@ -627,8 +633,11 @@ public class ASD {
                 thereIsMore = true;
             }
             
+            //String t = desResponse.getValueForField("", String)
+                    
             List<ParameterMetadata> params = desResponse.parameters();
             for (ParameterMetadata paraMeta : params) {
+                String name = paraMeta.name();
                 al.add(paraMeta);
             } 
             
