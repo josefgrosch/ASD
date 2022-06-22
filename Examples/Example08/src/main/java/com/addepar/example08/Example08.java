@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public class Example08 {
 
-    public static void main(String[] args) {
+    public static void main(String [] args) {
         int i = 0;
         
         try {

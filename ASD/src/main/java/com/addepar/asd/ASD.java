@@ -385,6 +385,10 @@ public class ASD {
         boolean debug = true;
         ASDReply asdr = new ASDReply();
         
+        if (! sm.getServiceStatus().contains("dead")) {
+            sm.setServiceStatus("live");
+        }
+        
         String key   = Common.genParameterKey(sm);
         String value = sm.toJson();
         
@@ -426,23 +430,18 @@ public class ASD {
      */
     public ASDReply unregisterService(ServiceMessage sm) {
         ASDReply asdr = null;
+        boolean debug = false;
         
         try {
-            asdr = this.getParameterValue(sm);
-            String key = sm.getParameterKey();
-                                                                   
-            //DeleteParameterRequest dpr = new DeleteParameterRequest.Builder.name(key).toBuilder();
+            if (debug) {
+                asdr = this.getParameterValue(sm);
+                String key = sm.getParameterKey();
+            }
+            
+            sm.setServiceStatus("dead");
+                                        
+            asdr = registerService(sm);
           
-            /*
-            AWSCredentialsProvider credentials = InstanceProfileCredentialsProvider.getInstance();
-            AWSSimpleSystemsManagement simpleSystemsManagementClient =
-            AWSSimpleSystemsManagementClientBuilder.standard().withCredentials(credentials)
-                .withRegion(Regions.getCurrentRegion().getName()).build();
-    
-            DeleteParameterRequest parameterRequest = new DeleteParameterRequest().withName(key);
-
-            simpleSystemsManagementClient.deleteParameter(parameterRequest);
-            */
         } catch (ASDKeyNotFoundException ex) {
             Logger.getLogger(ASD.class.getName()).log(Level.SEVERE, null, ex);
         }

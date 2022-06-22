@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class Example03 {
 
-    public static void main(String[] args) {
+    public static void main(String [] args) {
         List<String> Services = Arrays.asList("aoatvb2smsdb",      "aoatvb2testdb",
                                               "apilb",             "comp-server",
                                               "factortags",        "iverson",

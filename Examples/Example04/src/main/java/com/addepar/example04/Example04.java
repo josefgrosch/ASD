@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public class Example04 {
 
-    public static void main(String[] args) {
+    public static void main(String [] args) {
         StringBuilder sb = new StringBuilder();
         Utility u = new Utility();
         

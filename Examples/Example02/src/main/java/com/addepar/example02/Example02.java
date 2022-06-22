@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class Example02 {
 
-    public static void main(String[] args) {
+    public static void main(String [] args) {
         
         String accountId = "123456789012";
         String clientName = "PicklesUnlimited";
