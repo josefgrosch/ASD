@@ -57,6 +57,9 @@ package com.addepar.asd;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.time.Instant;
+import org.json.JSONObject;
+import software.amazon.awssdk.regions.Region;
 
 
 /**
@@ -92,7 +95,7 @@ public class Utility {
         
         sm.setConnectionString(connectionString);
         
-        String pKey = Common.genParameterKey(sm);
+        String pKey = genParameterKey(sm);
         sm.setParameterKey(pKey);
         
         return sm;
@@ -118,7 +121,118 @@ public class Utility {
         
         return fObj;
     }   // End of getFileFromResource
-}
+    
+     /**
+     * 
+     * The method <b>toJson</b> takes a fully populated 
+     * {@link com.addepar.asd.ServiceMessage ServiceMessage} and builds a 
+     * correctly formatted json string.
+     * 
+     * @param sm  A fully populated {@link com.addepar.asd.ServiceMessage ServiceMessage}.
+     * @return The passed in ServiceMessage as a json string.
+     */
+    public static String toJson(ServiceMessage sm) {
+        JSONObject jObj = new JSONObject();
+        
+        Instant now = Instant.now();
+        String TimeNow = now.toString();
+        
+        jObj.put("gen_time",           TimeNow);
+        jObj.put("account_id",         sm.getAccountId());
+        jObj.put("client_name",        sm.getClientName());
+        jObj.put("arcade_name",        sm.getArcadeName());
+        jObj.put("service_name",       sm.getServiceName());
+        jObj.put("connection_string",  sm.getConnectionString());
+        jObj.put("service_status",     sm.getServiceStatus());
+        jObj.put("service_status",     sm.getServiceStatus());
+        jObj.put("msg",                sm.getMsg());
+        
+        return jObj.toString(4);
+    }   // End of toJson
+    
+    /**
+     * 
+     * The method <b>genParameterKey</b> takes selected fields from a full 
+     * populated {@link com.addepar.asd.ServiceMessage ServiceMessage} and 
+     * formats then into an AWS SSM Parameter key to be used by the ASD class.
+     * <p>
+     * The fields are;
+     * <ul>
+     * <li>account ID</li>
+     * <li>client name</li>
+     * <li>arcade name</li>
+     * <li>service name</li>
+     * </ul>
+     * <p>
+     * The following is an example;
+     * <p>
+     * /ASD/123456789012/joes_pretty_good_bank/real_ripoff/salami_slicer
+     * 
+     * @param sm A full populated {@link com.addepar.asd.ServiceMessage ServiceMessage}.
+     * @return An AWS SSM Parameter key based on the contents of {@link com.addepar.asd.ServiceMessage ServiceMessage}.
+     */
+    public static String genParameterKey(ServiceMessage sm) {
+        StringBuilder sb = new StringBuilder();
+                
+        sb.append("/ASD/");
+        sb.append(sm.getAccountId()).append("/");
+        sb.append(sm.getClientName()).append("/");
+        sb.append(sm.getArcadeName()).append("/");
+        sb.append(sm.getServiceName()).append("/service-status.json");
+        
+        return sb.toString();
+    }   // End of genParameterKey
+    
+    /**
+     * 
+     * The method <b>genParameterKey</b> takes the passed in fields and 
+     * formats then into an AWS SSM Parameter key to be used by the ASD class.
+     * <p>
+     * The fields are;
+     * <ul>
+     * <li>account ID</li>
+     * <li>client name</li>
+     * <li>arcade name</li>
+     * <li>service name</li>
+     * </ul>
+     * <p>
+     * The following is an example;
+     * <p>
+     * /ASD/123456789012/joes_pretty_good_bank/real_ripoff/salami_slicer
+     * 
+     * @param accountId The AWS account ID.
+     * @param clientName The client name
+     * @param arcadeName
+     * @param serviceName
+     * 
+     * @return An AWS SSM Parameter key based on the passed in values.
+     */
+    public static String genParameterKey(String accountId,
+                                         String clientName,
+                                         String arcadeName,
+                                         String serviceName) {
+        
+        StringBuilder sb = new StringBuilder();
+                
+        sb.append("/ASD/");
+        sb.append(accountId).append("/");
+        sb.append(clientName).append("/");
+        sb.append(arcadeName).append("/");
+        sb.append(serviceName).append("/service-status.json");
+        
+        return sb.toString();  
+    }   // End of genParameterKey
+    
+    /**
+     * 
+     * @return 
+     */
+    public static Region determineThisRegion() {
+        Region region = null;
+        
+        return region;
+    }   // End of determineRegion
+}   // End of class Utility
 
 
 /**************************************************************************
