@@ -283,7 +283,7 @@ public class ServiceMessage {
      */
     public String getParameterKey() {
         if (parameterKey.length() == 0) {
-            this.parameterKey = Common.genParameterKey(this);
+            this.parameterKey = Utility.genParameterKey(this);
         }
         
         return this.parameterKey;
@@ -406,7 +406,7 @@ public class ServiceMessage {
      * @return 
      */
     public String toJson() {
-        return Common.toJson(this);
+        return Utility.toJson(this);
     }   // End of toJson
     
     /**
@@ -420,14 +420,14 @@ public class ServiceMessage {
                                  String clientName,
                                  String arcadeName,
                                  String serviceName) {
-        this.parameterKey = Common.genParameterKey(accountId,
+        this.parameterKey = Utility.genParameterKey(accountId,
                                                    clientName,
                                                    arcadeName,
                                                    serviceName);
     }   // End of addParameterKey
     
     public void updateParameterKey() {
-        this.setParameterKey(Common.genParameterKey(this));
+        this.setParameterKey(Utility.genParameterKey(this));
     }
 }   // End of class ServiceMessage
 

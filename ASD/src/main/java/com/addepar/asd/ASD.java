@@ -138,9 +138,6 @@ public class ASD {
      */
     private ServiceMessage sm = null;
     
-    /**
-     * 
-     */
     private String fluxCapacitor = "";
     
   
@@ -252,6 +249,12 @@ public class ASD {
      */
     public  ASD(JSONObject jObject) {
         this();
+        
+        this.accountId   = jObject.getString("account_id");
+        this.clientName  = jObject.getString("client_name");
+        this.arcadeName  = jObject.getString("arcade_name");
+        this.serviceName = jObject.getString("service_name");
+        
     }   // End of constructor - json object
     
     //
@@ -389,7 +392,7 @@ public class ASD {
             sm.setServiceStatus("live");
         }
         
-        String key   = Common.genParameterKey(sm);
+        String key   = Utility.genParameterKey(sm);
         String value = sm.toJson();
         
         /*
@@ -449,8 +452,21 @@ public class ASD {
          return asdr;
     }   // End of unregisterService
     
+    /**
+     * 
+     * @param sm
+     * @return 
+     */
+    public ASDReply updateService(ServiceMessage sm) {
+        ASD asd = new ASD();
+        
+        sm.updateParameterKey();
+        
+        ASDReply asdr = asd.registerService(sm);
+        
+        return asdr;
+    }   // End of updateService
    
-    
     /**
      * 
      * @param sm
@@ -695,17 +711,11 @@ public class ASD {
             localSm = this.sm;
         }
         
-        String outStr = Common.toJson(localSm);
+        String outStr = Utility.toJson(localSm);
         return outStr;
     }
     
-    /*
-    public String writeNoseyStringTest() {
-        return this.writeNoseyString();
-    }
-    */
-    
-    private String writeNoseyString() {
+  private String writeNoseyString() {
         //this.flux_capacitor = true;
         //StringBuilder sb = new StringBuilder();
         String outStr = "";
@@ -741,6 +751,7 @@ public class ASD {
      * @return
      * @throws URISyntaxException 
      */
+    
     private File getFileFromResource(String fileName) 
             throws URISyntaxException {
 
@@ -755,6 +766,7 @@ public class ASD {
         
         return fObj;
     }   // End of getFileFromResource
+    
 }   // End of class ASD
 
 
