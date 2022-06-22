@@ -63,8 +63,10 @@ import org.json.JSONObject;
  *
  * This class is used to filter out the parameter records from those 
  * contained in the ArrayList returned from the parameter store query. 
- * 
- * @author Josef Grosch -- josef.grosch@addepar.com
+ * A ASDFilter that has no fields filled in yeilds all parameters that 
+ * start with ASD.
+
+* @author Josef Grosch -- josef.grosch@addepar.com
  */
 public class ASDFilter {
 
