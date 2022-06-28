@@ -60,6 +60,10 @@ package com.addepar.asd;
 /**
  *
  * @author Josef Grosch (josef.grosch@addepar.com)
+<<<<<<< HEAD:ASD/src/main/java/com/addepar/asd/ASDMissingValuesException.java
+=======
+ * @version 0.0.1
+>>>>>>> dev:src/main/java/com/addepar/asd/ASD.java
  */
 public class ASDMissingValuesException extends Exception {
 

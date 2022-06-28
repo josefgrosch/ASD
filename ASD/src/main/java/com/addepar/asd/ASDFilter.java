@@ -65,8 +65,14 @@ import org.json.JSONObject;
  * contained in the ArrayList returned from the parameter store query. 
  * A ASDFilter that has no fields filled in yeilds all parameters that 
  * start with ASD.
+<<<<<<< HEAD
 
 * @author Josef Grosch -- josef.grosch@addepar.com
+=======
+ *
+ * @author Josef Grosch -- josef.grosch@addepar.com
+ * @version 0.0.1
+>>>>>>> dev
  */
 public class ASDFilter {
 

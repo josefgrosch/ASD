@@ -61,6 +61,10 @@ import java.util.Arrays;
 /**
  *
  * @author Josef Grosch (josef.grosch@addepar.com)
+<<<<<<< HEAD
+=======
+ * @version 0.0.1
+>>>>>>> dev
  */
 public class Common {
     /**
