@@ -1,13 +1,13 @@
 /**************************************************************************
 **
-**                             < ASDReply.java >
+**                           < Utility.java >
 **
 **************************************************************************/
 
 
 /**************************************************************************
 **
-**  File Name    : ASDReply.java
+**  File Name    : Utility.java
 **
 **  Author       : Addepar Infrastructure Platform Tools Team 
 **                          
@@ -54,17 +54,21 @@ package com.addepar.asd;
 **                                Imports
 **
 **************************************************************************/
+import com.amazonaws.regions.Region;
+import com.amazonaws.regions.RegionUtils;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.Instant;
+import java.util.Iterator;
+import java.util.List;
 import org.json.JSONObject;
-import software.amazon.awssdk.regions.Region;
 
 
 /**
  *
  * @author Josef Grosch (josef.grosch@addepar.com)
+ * @version 0.0.1
  */
 public class Utility {
     
@@ -227,16 +231,48 @@ public class Utility {
      * 
      * @return 
      */
-    public static Region determineThisRegion() {
-        Region region = null;
+    public Region determineThisRegion() {
+        String defaultRegion = System.getenv("DEFAULT_REGION");
+        if (defaultRegion == null || defaultRegion.length() == 0) {
+            defaultRegion = Common.DEFAULT_REGION;
+        }
         
-        return region;
+        return determineThisRegion(defaultRegion);
+    }   // End of determineRegion
+    
+    /**
+     * 
+     * @param rName
+     * @return 
+     */
+    public Region determineThisRegion(String rName) {
+        String regionName = "";
+        boolean regionFound = false;
+           
+        List awsRegions = RegionUtils.getRegions();
+        Iterator it = awsRegions.iterator();
+        while (it.hasNext()) {
+            Region r = (Region) it.next();
+            regionName = r.getName();
+            if (regionName.equalsIgnoreCase(rName)) {
+                regionFound = true;
+                break;
+            }   // End of if
+        }   // End of wile loop
+
+        if (! regionFound) {
+            regionName = Common.DEFAULT_REGION;
+        } 
+        
+        Region region = RegionUtils.getRegion(regionName);
+        
+        return region;  
     }   // End of determineRegion
 }   // End of class Utility
 
 
 /**************************************************************************
 **
-**                          < End of ASDReply.java >
+**                        < End of Utility.java >
 **
 **************************************************************************/

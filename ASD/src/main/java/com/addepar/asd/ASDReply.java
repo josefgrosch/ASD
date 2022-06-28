@@ -62,6 +62,7 @@ import software.amazon.awssdk.http.*;
 /**
  *
  * @author Josef Grosch (josef.grosch@addepar.com)
+ * @version 0.0.1
  */
 public class ASDReply {
     

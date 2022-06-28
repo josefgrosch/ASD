@@ -60,6 +60,7 @@ package com.addepar.asd;
 /**
  *
  * @author Josef Grosch (josef.grosch@addepar.com)
+ * @version 0.0.1
  */
 public class ASDMissingValuesException extends Exception {
 
